@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>adminr</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='recibos.css')}}" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="navbar-left">
+        <span>Bienvenido, Administrador</span>
+      </div>
+      <div class="navbar-right">
+        <a href="{{url_for('admini')}}">Inmuebles</a>
+        <a href="{{url_for('contratos')}}">Contratos</a>
+        <a href="{{url_for('recibos')}}">Recibos</a>
+        <a href="{{url_for('personas')}}">Personas</a>
+        <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="panel">
+      <h2>Lista de recibos</h2>
+      <div class="scrollable-list">
+        <table>
+          <thead>
+            <tr>
+              <td>Codigo contrato</td>
+              <td>Fecha pago</td>
+              <td>Cuota</td>
+              <td>Botones</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for recibo in recibos %}
+            <tr>
+              <!-- Codigo contrato -->
+              <td>{{recibo.1}}</td>
+              <!-- Fecha pago -->
+              <td>{{recibo.2}}</td>
+              <!-- Cuota -->
+              <td>{{recibo.3}}</td>
+              <td>
+                <!-- <a href="/edit/{{recibo.0}}">Editar</a> -->
+                <a href="/deleter/{{recibo.0}}">Borrar</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        {% if current_page > 1 %}
+        <a href="{{ url_for('recibos', page=1) }}">Primera</a>
+        {% endif %}
+
+        {% for page_num in range(1, total_pages + 1) %}
+        <span{% if page_num==current_page %} class="current" {% endif %}>
+          <a href="{{ url_for('recibos', page=page_num) }}">{{ page_num }}</a>
+          </span>
+          {% endfor %}
+
+          {% if current_page < total_pages %} <a href="{{ url_for('recibos', page=current_page + 1) }}">Siguiente</a>
+            {% endif %}
+      </div>
+      <div class="container">
+        <h2>Registro de Pagos Mensuales</h2>
+
+        <form id="paymentForm" action="/add_recibo" method="post">
+          <label>Codigo contrato:</label>
+          <select id="codigoContrato" name="codigoContrato">
+            <option value="">Seleccionar</option>
+            {% for contrato in contratos %}
+            <option value="{{contrato.0}}">{{contrato.0}}</option>
+            {% endfor %}
+          </select>
+
+          <label for="monto">Monto:</label>
+          <input type="number" value="{{contratos.2}}" id="monto" name="monto" readonly>
+
+          <label for="plazo">Plazo:</label>
+          <input type="number" value="{{contratos.1}}" id="plazo" name="plazo" readonly>
+
+          <div class="checkbox-group" id="checkboxGroup"></div>
+
+          <div id="totalPagar"></div>
+          <input type="hidden" id="CurrentDate" name="CurrentDate">
+          <input type="hidden" id="Cuota" name="Cuota">
+          <button type="submit">Registrar Pago</button>
+        </form>
+        <!-- <button type="button" onclick="mostrarValores()">Mostrar Valores</button> -->
+      </div>
+      <script>
+        function mostrarValores() {
+          const checkboxes = document.querySelectorAll('input[name^="mes"]');
+          checkboxes.forEach(checkbox => {
+            console.log(checkbox.name, checkbox.checked);
+          });
+        }
+      </script>
+      <script>
+        const currentDate = new Date();
+
+        document.getElementById('codigoContrato').addEventListener('change', function () {
+          const codigoContrato = this.value;
+
+          // Realizar una solicitud AJAX para obtener la información del contrato seleccionado
+          fetch(`/obtener_contrato/${codigoContrato}`)
+            .then(response => response.json())
+            .then(data => {
+              console.log('Información del contrato:', data);
+              document.getElementById('monto').value = data.canon;
+              document.getElementById('plazo').value = data.plazo;
+
+              // Generar checkboxes después de obtener la información del contrato
+              generateCheckboxes(data.plazo);
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('plazo').addEventListener('change', function () {
+          console.log('Plazo cambiado:', this.value);
+          generateCheckboxes(this.value);
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          // Setear los valores de fecha y cuota antes de enviar el formulario
+          document.getElementById('CurrentDate').value = currentDate.toISOString().split('T')[0];
+          document.getElementById('Cuota').value = calculateTotal();
+
+          // Ahora puedes enviar el formulario
+          this.submit();
+        });
+
+        // Generar checkboxes al cargar la página
+        generateCheckboxes(document.getElementById('plazo').value);
+
+        function generateCheckboxes(plazo) {
+          console.log('Generando checkboxes para plazo:', plazo);
+          const checkboxGroup = document.getElementById('checkboxGroup');
+          checkboxGroup.innerHTML = '';
+
+          const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+          const currentMonth = currentDate.getMonth();
+          const montoInicial = document.getElementById('monto').value;
+
+          for (let i = 0; i < plazo; i++) {
+            const monthIndex = (currentMonth + i) % 12;
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.name = `mes${monthIndex + 1}`; // Usa el mismo nombre que en el formulario Python
+            checkbox.value = monthIndex + 1;
+            checkbox.id = `mes${monthIndex + 1}`;
+            checkbox.className = `checkbox-${meses[monthIndex].toLowerCase()}`;
+
+            const label = document.createElement('label');
+            label.htmlFor = `mes${monthIndex + 1}`;
+            label.appendChild(document.createTextNode(`${meses[monthIndex]} - Monto: $${montoInicial}`));
+
+            checkboxGroup.appendChild(label);
+            label.appendChild(checkbox);
+          }
+        }
+
+
+        function calculateTotal() {
+          const checkboxes = document.querySelectorAll('input[name^="mes"]:checked');
+          let total = 0;
+
+          checkboxes.forEach(checkbox => {
+            const montoInicial = document.getElementById('monto').value;
+            total += parseFloat(montoInicial) || 0;
+          });
+
+          document.getElementById('totalPagar').innerText = `Total a pagar: $${total}`;
+          return total;
+        }
+      </script>
+
+
+    </div>
+    <script src="/js/administrador.js"></script>
+  </main>
+</body>
+
+</html>

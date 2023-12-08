@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>adminredit</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='administrador.css')}}" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="navbar-left">
+                <span>Bienvenido, Administrador</span>
+            </div>
+            <div class="navbar-right">
+                <a href="{{url_for('admini')}}">Inmuebles</a>
+                <a href="{{url_for('contratos')}}">Contratos</a>
+                <a href="{{url_for('recibos')}}">Recibos</a>
+                <a href="{{url_for('personas')}}">Personas</a>
+                <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="panel">
+            <form action="/updater/{{recibo.0}}" method="POST">
+                <label>Codigo contrato:</label>
+                <input type="number" value="{{recibo.1}}" name="codigoContrato"
+                    placeholder="Ingresa el codigo del contrato" />
+                <label>Fecha pago:</label>
+                <input type="date" value="{{recibo.2}}" name="FechaPago" placeholder="Ingresa la fecha de pago" />
+                <label>Cuota:</label>
+                <input type="number" value="{{recibo.3}}" name="Cuota" placeholder="Ingresa el valor" />
+
+                <div class="button-group">
+                    <button type="submit">Agregar</button>
+                </div>
+            </form>
+        </div>
+        <script src="/js/administrador.js"></script>
+    </main>
+</body>
+
+</html>

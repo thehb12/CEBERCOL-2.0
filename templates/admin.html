@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>admin</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='administrador.css')}}" />
+</head>
+
+  <body>
+    <header>
+      <nav>
+        <div class="navbar-left">
+          <span>Bienvenido, Administrador</span>
+        </div>
+        <div class="navbar-right">
+          <a href="{{url_for('admini')}}">Inmuebles</a>
+          <a href="{{url_for('contratos')}}">Contratos</a>
+          <a href="{{url_for('recibos')}}">Recibos</a>
+          <a href="{{url_for('personas')}}">Personas</a>
+          <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="panel">
+        <h2>Lista de inmuebles</h2>
+        <div class="scrollable-list" id="list">
+          <table>
+            <thead>
+              <tr>
+                <td>Tipo</td>
+                <td>Ubicacion</td>
+                <td>Habitaciones</td>
+                <td>Baños</td>
+                <td>Garaje</td>
+                <td>Precio</td>
+                <td>Arrendador</td>
+                <td>Servicio</td>
+                <td>Patio</td>
+                <td>Botones</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for inmueble in inmuebles %}
+              <tr>
+                <!-- Tipo -->
+                <td>{{inmueble.11}}</td>
+                <!-- Ubicacion -->
+                <td>{{inmueble.17}}</td>
+                <!-- Habitaciones -->
+                <td>{{inmueble.7}}</td>
+                <!-- Baños -->
+                <td>{{inmueble.6}}</td>
+                <!-- Garaje -->
+                <td>{{inmueble.9}}</td>
+                <!-- Precio -->
+                <td>{{inmueble.13}}</td>
+                <!-- Arrendador -->
+                <td>{{inmueble.14}}</td>
+                <!-- Servicio -->
+                <td>{{inmueble.12}}</td>
+                <!-- Patio -->
+                <td>{{inmueble.8}}</td>
+                <td>
+                  <a href="/edit/{{inmueble.0}}">Editar</a>
+                  <a href="/delete/{{inmueble.0}}">Borrar</a>
+                  <a href="/add_contratod/{{inmueble.0}}">Contrato</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          {% if current_page > 1 %}
+          <a href="{{ url_for('admini', page=1) }}">Primera</a>
+          {% endif %}
+      
+          {% for page_num in range(1, total_pages + 1) %}
+          <span{% if page_num == current_page %} class="current"{% endif %}>
+          <a href="{{ url_for('admini', page=page_num) }}">{{ page_num }}</a>
+          </span>
+          {% endfor %}
+
+          {% if current_page < total_pages %} <a href="{{ url_for('admini', page=current_page + 1) }}">Siguiente</a>
+            {% endif %}
+      </div>
+      <form action="/add_inmueble" method="POST" enctype="multipart/form-data">
+        <label>Agregar información:</label>
+        <input type="file" name="Foto" accept="image*" multiple />
+
+        <label>Descripción:</label>
+        <textarea name="Descripcion" placeholder="Ingresa la descripción"></textarea>
+
+        <label>Tipo de inmueble:</label>
+        <select name="Tipo" id="">
+          <option value="">Seleccionar</option>
+          <option value="Casa">Casas</option>
+          <option value="Apartamento">Apartamentos</option>
+          <option value="Apartaestudio">Apartaestudios</option>
+          <option value="Oficina">Oficinas</option>
+          <option value="Bodega">Bodegas</option>
+          <option value="Local">Locales</option>
+        </select>
+
+        <label>Ubicación:</label>
+        <input type="number" name="Ubicacion" placeholder="Ingresa la ubicación" />
+
+        <label>Habitaciones:</label>
+        <input type="number" name="Habitaciones" placeholder="Ingresa el número de habitaciones" />
+
+        <label>Baños:</label>
+        <input type="number" name="Banos" placeholder="Ingresa el número de baños" />
+
+        <label>Servicio:</label>
+        <select name="Servicio" id="">
+          <option value="">Seleccionar</option>
+          <option value="Arriendo">Arriendo</option>
+          <option value="Venta">Venta</option>
+        </select>
+
+        <label>Patio:</label>
+        <select name="Patio" id="">
+          <option value="">Seleccionar</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+
+        <label>Garaje:</label>
+        <select name="Garaje" id="">
+          <option value="">Seleccionar</option>
+          <option value="Si">Si</option>
+          <option value="No">No</option>
+        </select>
+
+        <label>Precio:</label>
+        <input type="number" name="Precio" placeholder="Ingresa el precio" />
+
+        <label>Codigo Propietario:</label>
+        <input type="text" list="opciones" name="Arrendador" id="ArrendadorInput" oninput="filtrarOpciones()"
+          onchange="seleccionarOpcion()">
+        <datalist id="opciones">
+          {% for persona in personas %}
+          <option value="{{ persona.0 }}" data-custom="{{ persona.3 }}-{{ persona.1 }}">C.C.{{ persona.3 }}-{{ persona.1
+            }}</option>
+          {% endfor %}
+        </datalist>
+        <div class="button-group">
+          <button type="submit">Agregar</button>
+        </div>
+      </form>
+    </div>
+    <script src="{{url_for('static',filename='js/administrador.js')}}"></script>
+  </main>
+</body>
+
+</html>

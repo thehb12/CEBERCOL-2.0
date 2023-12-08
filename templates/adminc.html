@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>adminc</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='administrador.css')}}" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="navbar-left">
+        <span>Bienvenido, Administrador</span>
+      </div>
+      <div class="navbar-right">
+        <a href="{{url_for('admini')}}">Inmuebles</a>
+        <a href="{{url_for('contratos')}}">Contratos</a>
+        <a href="{{url_for('recibos')}}">Recibos</a>
+        <a href="{{url_for('personas')}}">Personas</a>
+        <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="panel">
+      <h2>Lista de contratos</h2>
+      <div class="scrollable-list">
+        <table>
+          <thead>
+            <tr>
+              <td>Plazo</td>
+              <td>Canon</td>
+              <td>Fecha inicio</td>
+              <td>Fecha fin</td>
+              <td>Codigo inmueble</td>
+              <td>Inquilino</td>
+              <td>Botones</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for contrato in contratos %}
+            <tr>
+              <!-- Plazo -->
+              <td>{{contrato.1}}</td>
+              <!-- Canon -->
+              <td>{{contrato.2}}</td>
+              <!-- Fecha inicio -->
+              <td>{{contrato.3}}</td>
+              <!-- Fecha fin -->
+              <td>{{contrato.4}}</td>
+              <!-- Codigo inmueble -->
+              <td>{{contrato.5}}</td>
+              <!-- Codigo Inquilino -->
+              <td>{{contrato.7}}</td>
+              <td>
+                <a href="/editc/{{contrato.0}}">Editar</a>
+                <a href="/deletec/{{contrato.0}}">Borrar</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        {% if current_page > 1 %}
+        <a href="{{ url_for('contratos', page=1) }}">Primera</a>
+        {% endif %}
+
+        {% for page_num in range(1, total_pages + 1) %}
+        <span{% if page_num==current_page %} class="current" {% endif %}>
+          <a href="{{ url_for('contratos', page=page_num) }}">{{ page_num }}</a>
+          </span>
+          {% endfor %}
+
+          {% if current_page < total_pages %} <a href="{{ url_for('contratos', page=current_page + 1) }}">Siguiente</a>
+            {% endif %}
+      </div>
+      <form action="/add_contrato" method="POST">
+        <label>Codigo inmueble:</label>
+        <select name="CodigoInmueble">
+          <option value="0">Seleccionar</option>
+          {% for inmueble in inmuebles %}
+          <option value="{{inmueble.0}}">
+            {{inmueble.11}}-{{inmueble.12}}-{{inmueble.16}}
+          </option>
+          {% endfor%}
+        </select>
+        <label>Codigo Inquilino:</label>
+        <select name="CodigoArrendatario">
+          <option value="0">Seleccionar</option>
+          {% for persona in personas %}
+          <option value="{{persona.0}}">{{persona.1}}</option>
+          {% endfor%}
+        </select>
+        <label>Plazo(meses):</label>
+        <input type="number" id="plazo" name="Plazo" placeholder="Ingresa el plazo" />
+
+        <label>Fecha inicio:</label>
+        <input type="date" id="fechaInicio" name="FechaInicio" placeholder="Ingresa la fecha de inicio" />
+
+        <label>Fecha fin:</label>
+        <input type="date" id="fechaFin" name="FechaFin" placeholder="Fecha de fin calculada" readonly />
+
+        <label>Canon:</label>
+        <input type="number" name="Canon" placeholder="Ingresar el valor" />
+        <div class="button-group">
+          <button type="submit">Agregar</button>
+        </div>
+      </form>
+    </div>
+    <script src="/js/administrador.js"></script>
+  </main>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const plazoInput = document.getElementById("plazo");
+    const fechaInicioInput = document.getElementById("fechaInicio");
+    const fechaFinInput = document.getElementById("fechaFin");
+
+    function calcularFechaFin() {
+      const plazo = parseInt(plazoInput.value);
+      const fechaInicio = new Date(fechaInicioInput.value);
+
+      if (
+        !isNaN(plazo) &&
+        fechaInicio instanceof Date &&
+        !isNaN(fechaInicio)
+      ) {
+        // Copia la fecha de inicio y agrega el plazo en meses
+        const fechaFin = new Date(fechaInicio);
+        fechaFin.setMonth(fechaInicio.getMonth() + plazo);
+
+        // Formatea la fecha de fin como YYYY-MM-DD
+        const formattedFechaFin = fechaFin.toISOString().split("T")[0];
+
+        fechaFinInput.value = formattedFechaFin;
+      } else {
+        fechaFinInput.value = ""; // Limpia la fecha de fin si los valores no son válidos
+      }
+    }
+
+    // Agregar oyentes de eventos para el cambio de plazo y fecha de inicio
+    plazoInput.addEventListener("input", calcularFechaFin);
+    fechaInicioInput.addEventListener("input", calcularFechaFin);
+  });
+</script>
+
+</html>

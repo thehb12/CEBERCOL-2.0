@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>admincdirecto</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='administrador.css')}}" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="navbar-left">
+        <span>Bienvenido, Administrador</span>
+      </div>
+      <div class="navbar-right">
+        <a href="{{url_for('admini')}}">Inmuebles</a>
+        <a href="{{url_for('contratos')}}">Contratos</a>
+        <a href="{{url_for('recibos')}}">Recibos</a>
+        <a href="{{url_for('personas')}}">Personas</a>
+        <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="panel">
+      <form action="/add_contratodi/{{inmueble.0}}" method="POST">
+        <label>Codigo inmueble:</label>
+        <input type="number" value="{{inmueble.0}}" name="CodigoInmueble" placeholder="Ingresa Codigo del inmueble"
+          readonly />
+        <label>Codigo arrendatario:</label>
+        <select name="CodigoArrendatario">
+          <option value="">Seleccionar</option>
+          {% for persona in personas %}
+          <option value="{{persona.0}}">{{persona.1}}</option>
+          {% endfor%}
+        </select>
+        <label>Plazo(meses):</label>
+        <input type="number" id="plazo" name="Plazo" placeholder="Ingresa el plazo" />
+
+        <label>Fecha inicio:</label>
+        <input type="date" id="fechaInicio" name="FechaInicio" placeholder="Ingresa la fecha de inicio" />
+
+        <label>Fecha fin:</label>
+        <input type="date" id="fechaFin" name="FechaFin" placeholder="Fecha de fin calculada" readonly />
+
+        <label>Canon:</label>
+        <input type="number" name="Canon" placeholder="Ingresar el valor" />
+        <div class="button-group">
+          <button type="submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const plazoInput = document.getElementById("plazo");
+    const fechaInicioInput = document.getElementById("fechaInicio");
+    const fechaFinInput = document.getElementById("fechaFin");
+
+    function calcularFechaFin() {
+      const plazo = parseInt(plazoInput.value);
+      const fechaInicio = new Date(fechaInicioInput.value);
+
+      if (!isNaN(plazo) && fechaInicio instanceof Date && !isNaN(fechaInicio)) {
+        // Copia la fecha de inicio y agrega el plazo en meses
+        const fechaFin = new Date(fechaInicio);
+        fechaFin.setMonth(fechaInicio.getMonth() + plazo);
+
+        // Formatea la fecha de fin como YYYY-MM-DD
+        const formattedFechaFin = fechaFin.toISOString().split('T')[0];
+
+        fechaFinInput.value = formattedFechaFin;
+      } else {
+        fechaFinInput.value = ""; // Limpia la fecha de fin si los valores no son válidos
+      }
+    }
+
+    // Agregar oyentes de eventos para el cambio de plazo y fecha de inicio
+    plazoInput.addEventListener("input", calcularFechaFin);
+    fechaInicioInput.addEventListener("input", calcularFechaFin);
+  });
+</script>
+
+</html>

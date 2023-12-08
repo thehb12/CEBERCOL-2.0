@@ -1,0 +1,169 @@
+.container {
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+main {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    height: 100vh;
+}
+
+/*  */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*  */
+/* Estilos para el formulario y el contenedor */
+#consulta-form {
+    max-width: 425px; /* Aumenta el ancho máximo del contenedor */
+    width: 100%; /* Hace que el contenedor ocupe el 100% del ancho disponible */
+    margin: 0 auto;
+    padding: 40px; /* Aumenta el espacio interno del contenedor */
+    border: 1px solid #a39f9f;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las etiquetas del formulario */
+#consulta-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Estilos para los campos de entrada */
+#consulta-form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Estilos para el botón del formulario */
+#consulta-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.582);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Cambiar estilo del botón al pasar el mouse sobre él */
+#consulta-form button:hover {
+    background-color: #077412;
+}
+
+#resultado {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/*********+CONSULTAR**********/
+.table-style {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11;
+
+}
+
+.table-style th,
+.table-style td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.table-style button {
+    background-color: #954dc2;
+    /* Color de fondo */
+    color: white;
+    /* Color del texto */
+    padding: 10px 15px;
+    /* Espaciado interno (vertical horizontal) */
+    font-size: 14px;
+    /* Tamaño de la fuente */
+    border: none;
+    /* Eliminar el borde */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    cursor: pointer;
+}
+
+/* Estilos para los labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilos para los campos de entrada */
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Estilos para los botones */
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Estilos para la tabla */
+.table-style {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table-style th, .table-style td {
+    border: 1px solid #130404;
+    padding: 10px;
+    text-align: center;
+}
+
+.table-style th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para el botón */
+#recibosx {
+    cursor: pointer;
+    color: rgb(46, 211, 4);
+}
+
+#recibosx:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para el resultado div */
+#resultado {
+    margin-top: 20px;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    /* background-color: #f9f9f9; */
+}

@@ -1,0 +1,12 @@
+{
+  "folders": [
+	{
+		"path": "../../xd/CEBERCOL"
+	}
+],
+  "settings": {
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.preferredHighContrastLightColorTheme": "Visual Studio Dark",
+    "workbench.preferredHighContrastColorTheme": "Default Light+"
+  }
+}

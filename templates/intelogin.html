@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='footer.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='header.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='login.css')}}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <div class="head">
+        <div class="logo">
+          <img
+            src="{{url_for('static',filename='/img/cebercolicon_1.ico')}}"
+            alt="logo de la marca"
+          />
+        </div>
+        <nav class="navbar">
+          <ul>
+            <li>
+              <a href="{{url_for('inteindex')}}">Inicio</a>
+            </li>
+            <li>
+              <a href="{{url_for('inteinmu')}}">Inmuebles</a>
+            </li>
+            <li>
+              <a href="#">Servicios</a>
+            </li>
+            <li><a href="{{url_for('consultar')}}">Contrato</a></li>
+            <li>
+              <a href="{{url_for('intelogin')}}">
+                <i class="fa-regular fa-user"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="main">
+      <section class="form-main">
+        <div class="form-content">
+          <div class="circle-1"></div>
+          <div class="circle-2"></div>
+          <div class="circle-3"></div>
+          <div class="box">
+            <h3>Bienvenido</h3>
+            <form action="/admini" onsubmit="return validarInicioSesion();">
+              <div class="input-box">
+                <input
+                  type="text"
+                  id="usuario"
+                  placeholder="Usuario"
+                  class="input-control"
+                  required
+                />
+              </div>
+              <div class="input-box">
+                <input
+                  type="Password"
+                  id="contraseña"
+                  placeholder="Contraseña"
+                  class="input-control"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn">Iniciar Sesion</button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <script>
+        function validarInicioSesion() {
+          // Obtén los valores de usuario y contraseña desde los campos de entrada.
+          var usuario = document.getElementById("usuario").value;
+          var contraseña = document.getElementById("contraseña").value;
+
+          // Elimina los espacios en blanco al principio y al final de los valores.
+          usuario = usuario.trim();
+          contraseña = contraseña.trim();
+
+          // Verifica si los campos están en blanco o contienen solo espacios.
+          if (usuario === "" || contraseña === "") {
+            alert("Por favor, completa todos los campos.");
+            return false; // Evita que el formulario se envíe.
+          }
+
+          // Verifica si el usuario y la contraseña son correctos.
+          if (usuario === "admincol" && contraseña === "colcebercol") {
+            // alert("Inicio de sesión exitoso");
+            return true; // Permite que el formulario se envíe.
+          } else {
+            alert("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
+            return false; // Evita que el formulario se envíe.
+          }
+        }
+      </script>
+    </main>
+    <footer>
+      <div class="social">
+        <div class="wpp">
+          <h2>WhatsApp</h2>
+          <a href="https://wa.me/573204991618">
+            <img
+              src="{{url_for('static',filename='/img/wpp.png')}}"
+              alt="WhatsApp"
+            />
+          </a>
+        </div>
+        <div class="fb">
+          <h2>Facebook</h2>
+          <a href="https://www.facebook.com/juanfe.cabralesbarbaran/">
+            <img
+              src="{{url_for('static',filename='/img/fc.jpg')}}"
+              alt="Facebook"
+            />
+          </a>
+        </div>
+        <div class="ig">
+          <h2>Instagram</h2>
+          <a href="https://www.instagram.com/juantosx/">
+            <img
+              src="{{url_for('static',filename='/img/instagram.png')}}"
+              alt="Instagram"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="datos">
+        <h2>Cesar albereto maradona</h2>
+        <p>
+          Nosotros sabemos que yo se que nada se, yo se que algo no se pero se
+          que algo usted no sabe que yo tampoco se. -Arcangel
+        </p>
+      </div>
+      <div class="mapa">
+        <div>
+          <a
+            href="https://www.google.com/maps/place/Cra.+19+%2319-7,+Barrancabermeja,+Santander/@7.0586298,-73.8584949,18z/data=!4m5!3m4!1s0x8e42eca46cca93b9:0xc9eeb5bfcfb604c1!8m2!3d7.0585614!4d-73.8584984"
+            ><img
+              src="{{url_for('static',filename='/img/pin-de-ubicacion.png')}}"
+              alt="Ubicacion"
+            />
+          </a>
+          <p>Carrera 19 #19-7</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

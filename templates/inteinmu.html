@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='footer.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='header.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='friltrogrid.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='inmuebles.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <div class="head">
+        <div class="logo">
+          <img
+            src="{{url_for('static',filename='/img/cebercolicon_1.ico')}}"
+            alt="logo de la marca"
+          />
+        </div>
+        <nav class="navbar">
+          <ul>
+            <li>
+              <a href="{{url_for('inteindex')}}">Inicio</a>
+            </li>
+            <li>
+              <a href="{{url_for('inteinmu')}}">Inmuebles</a>
+            </li>
+            <li>
+              <a href="#">Servicios</a>
+            </li>
+            <li><a href="{{url_for('consultar')}}">Contrato</a></li>
+            <li>
+              <a href="{{url_for('intelogin')}}">
+                <i class="fa-regular fa-user"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="main">
+      <div class="filtro">
+        <div>
+          <p>ESCOGE TU INMUEBLE IDEAL</p>
+        </div>
+        <div>Servicios</div>
+        <div>Inmuebles</div>
+        <div>Comuna</div>
+        <div>Habitaciones</div>
+        <div>Garaje</div>
+        <div>
+          <button class="boton" id="filtrarButton" onclick="filtrarInmuebles()">
+            Filtrar
+          </button>
+        </div>
+        <div>
+          <select id="Servicio">
+            <option value="Todas">Todas</option>
+            <option value="Venta">Venta</option>
+            <option value="Arriendo">Arriendo</option>
+          </select>
+        </div>
+        <div>
+          <select id="TipoInmueble">
+            <option value="Todas">Todas</option>
+            <option value="Casa">Casas</option>
+            <option value="Apartamento">Apartamentos</option>
+            <option value="Apartaestudio">Apartaestudios</option>
+            <option value="Oficina">Oficinas</option>
+            <option value="Bodega">Bodegas</option>
+            <option value="Local">Locales</option>
+          </select>
+        </div>
+        <div>
+          <select id="Comuna">
+            <option value="Todas">Todas</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+          </select>
+        </div>
+        <div>
+          <select id="Habitaciones">
+            <option value="Todas">Todas</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4+</option>
+          </select>
+        </div>
+        <div>
+          <select id="Garaje">
+            <option value="Todas">Todas</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+      </div>
+      <section class="galeria">
+        {% for inmueble in inmuebles%}
+        <div class="propiedad">
+          <img
+            src="{{url_for('static',filename='img/arriendo.jpg')}}"
+            alt="Propiedad"
+          />
+          <div class="centro">
+            <table>
+              <tr>
+                <th colspan="2"></th>
+              </tr>
+              <tr>
+                <td rowspan="1" class="td">Barrio</td>
+                <td rowspan="1" class="td">
+                  <input type="text" value="{{inmueble.17}}" readonly />
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="1" class="td">Servicio:</td>
+                <td rowspan="1" class="td">
+                  <input
+                    type="text"
+                    name="servicio"
+                    value="{{inmueble.12}}"
+                    readonly
+                  />
+                  <input
+                    type="text"
+                    name="comuna"
+                    value="{{inmueble.16}}"
+                    readonly
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="1" class="td">Tipo:</td>
+                <td rowspan="1" class="td">
+                  <input
+                    type="text"
+                    name="tipo"
+                    value="{{inmueble.11}}"
+                    readonly
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="1" class="td">Habitaciones:</td>
+                <td rowspan="1" class="td">
+                  <input
+                    type="text"
+                    name="habitaciones"
+                    value="{{inmueble.7}}"
+                    readonly
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="1" class="td">Baños:</td>
+                <td rowspan="1" class="td">
+                  <input type="text" value="{{inmueble.6}}" readonly />
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="1" class="td">Patio:</td>
+                <td rowspan="1" class="td">
+                  <input type="text" value="{{inmueble.8}}" readonly />
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="1" class="td">Garaje:</td>
+                <td rowspan="1" class="td">
+                  <input
+                    type="text"
+                    name="garaje"
+                    value="{{inmueble.9}}"
+                    readonly
+                  />
+                </td>
+              </tr>
+            </table>
+          </div>
+          <button
+            class="botonpropiedad"
+            onclick="window.location.href = '/detalles/{{inmueble.0}}'"
+          >
+            ${{inmueble.13}} / Ver mas
+          </button>
+        </div>
+        {% endfor%}
+      </section>
+      <div class="pagination">
+        {% if current_page > 1 %}
+        <a class="first-page" href="{{ url_for('inteinmu', page=1) }}"
+          >Primera</a
+        >
+        <a href="{{ url_for('inteinmu', page=current_page-1) }}">Anterior</a>
+        {% endif %} {% for num in range(1, total_pages + 1) %} {% if num ==
+        current_page %}
+        <span class="current-page">{{ num }}</span>
+        {% else %}
+        <a href="{{ url_for('inteinmu', page=num) }}">{{ num }}</a>
+        {% endif %} {% endfor %} {% if current_page < total_pages %}
+        <a href="{{ url_for('inteinmu', page=current_page+1) }}">Siguiente</a>
+        <a href="{{ url_for('inteinmu', page=total_pages) }}">Última</a>
+        {% endif %}
+      </div>
+    </main>
+    <footer>
+      <div class="social">
+        <div class="wpp">
+          <h2>WhatsApp</h2>
+          <a href="https://wa.me/573204991618">
+            <img
+              src="{{url_for('static',filename='/img/wpp.png')}}"
+              alt="WhatsApp"
+            />
+          </a>
+        </div>
+        <div class="fb">
+          <h2>Facebook</h2>
+          <a href="https://www.facebook.com/juanfe.cabralesbarbaran/">
+            <img
+              src="{{url_for('static',filename='/img/fc.jpg')}}"
+              alt="Facebook"
+            />
+          </a>
+        </div>
+        <div class="ig">
+          <h2>Instagram</h2>
+          <a href="https://www.instagram.com/juantosx/">
+            <img
+              src="{{url_for('static',filename='/img/instagram.png')}}"
+              alt="Instagram"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="datos">
+        <h2>Cesar albereto maradona</h2>
+        <p>
+          Nosotros sabemos que yo se que nada se, yo se que algo no se pero se
+          que algo usted no sabe que yo tampoco se. -Arcangel
+        </p>
+      </div>
+      <div class="mapa">
+        <div>
+          <a
+            href="https://www.google.com/maps/place/Cra.+19+%2319-7,+Barrancabermeja,+Santander/@7.0586298,-73.8584949,18z/data=!4m5!3m4!1s0x8e42eca46cca93b9:0xc9eeb5bfcfb604c1!8m2!3d7.0585614!4d-73.8584984"
+            ><img
+              src="{{url_for('static',filename='/img/pin-de-ubicacion.png')}}"
+              alt="Ubicacion"
+            />
+          </a>
+          <p>Carrera 19 #19-7</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="{{url_for('static',filename='/js/inteinmu.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</html>

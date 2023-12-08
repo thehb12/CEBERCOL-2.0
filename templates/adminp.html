@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>adminp</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='administrador.css')}}" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="navbar-left">
+        <span>Bienvenido, Administrador</span>
+      </div>
+      <div class="navbar-right">
+        <a href="{{url_for('admini')}}">Inmuebles</a>
+        <a href="{{url_for('contratos')}}">Contratos</a>
+        <a href="{{url_for('recibos')}}">Recibos</a>
+        <a href="{{url_for('personas')}}">Personas</a>
+        <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="panel">
+      <h2>Lista de personas</h2>
+      <div class="scrollable-list">
+        <table>
+          <thead>
+            <tr>
+              <td>Nombre</td>
+              <td>Correo</td>
+              <td>Cedula</td>
+              <td>Telefono</td>
+              <td>Direccion</td>
+              <td>Rol</td>
+              <td>Botones</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for persona in personas %}
+            <tr>
+              <!-- Nombre -->
+              <td>{{persona.1}}</td>
+              <!-- Correo -->
+              <td>{{persona.2}}</td>
+              <!-- Cedula -->
+              <td>{{persona.3}}</td>
+              <!-- Telefono -->
+              <td>{{persona.4}}</td>
+              <!-- Direccion -->
+              <td>{{persona.5}}</td>
+              <!-- Rol -->
+              <td>{{persona.6}}</td>
+              <td>
+                <a href="/editp/{{persona.0}}">Editar</a>
+                <a href="/deletep/{{persona.0}}">Borrar</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        {% if current_page > 1 %}
+        <a href="{{ url_for('personas', page=1) }}">Primera</a>
+        {% endif %}
+
+        {% for page_num in range(1, total_pages + 1) %}
+        <span{% if page_num==current_page %} class="current" {% endif %}>
+          <a href="{{ url_for('personas', page=page_num) }}">{{ page_num }}</a>
+          </span>
+          {% endfor %}
+
+          {% if current_page < total_pages %} <a href="{{ url_for('personas', page=current_page + 1) }}">Siguiente</a>
+            {% endif %}
+      </div>
+
+      <form action="add_persona" method="POST">
+        <label>Nombre:</label>
+        <input type="text" name="Nombre" placeholder="Ingresa el nombre" />
+        <label>Correo:</label>
+        <input type="email" name="Correo" placeholder="Ingresa el correo" />
+        <label>Direccion:</label>
+        <input type="text" name="Direccion" placeholder="Ingresa la direccion" />
+        <label>Telefono:</label>
+        <input type="number" name="Telefono" placeholder="Ingresa el telefono" />
+        <label>Rol:</label>
+        <select name="Rol">
+          <option value="">Seleccionar</option>
+          <option value="Inquilino">Inquilino</option>
+          <option value="Propietario">Propietario</option>
+        </select>
+        <label>Cedula:</label>
+        <input type="text" name="Cedula" placeholder="Ingresar la cedula" />
+
+        <div class="button-group">
+          <button type="submit">Agregar</button>
+        </div>
+      </form>
+    </div>
+    <script src="/js/administrador.js"></script>
+  </main>
+</body>
+
+</html>

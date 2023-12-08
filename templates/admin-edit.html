@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>adminedit</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='administrador.css')}}"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <div class="navbar-left">
+          <span>Bienvenido, Administrador</span>
+        </div>
+        <div class="navbar-right">
+          <a href="{{url_for('admini')}}">Inmuebles</a>
+          <a href="{{url_for('contratos')}}">Contratos</a>
+          <a href="{{url_for('recibos')}}">Recibos</a>
+          <a href="{{url_for('personas')}}">Personas</a>
+          <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="panel">
+        <form action="/update/{{inmueble.0}}" method="POST">
+          <label>Descripción:</label>
+          <textarea
+            name="Descripcion"
+            id="textarea"
+            placeholder="Ingresa la descripción"
+          ></textarea>
+
+          <label>Tipo de inmueble:</label>
+          <select name="Tipo" id="">
+            <option value="{{inmueble.11}}">{{inmueble.11}}</option>
+            <option value="Casa">Casa</option>
+            <option value="Apartamento">Apartamento</option>
+            <option value="Local">Local</option>
+            <option value="Aparta estudio">Aparta estudio</option>
+          </select>
+
+          <label>Ubicación:</label>
+          <input
+            type="number"
+            value="{{inmueble.14}}"
+            name="Ubicacion"
+            placeholder="Ingresa la ubicación"
+          />
+
+          <label>Habitaciones:</label>
+          <input
+            type="number"
+            value="{{inmueble.7}}"
+            name="Habitaciones"
+            placeholder="Ingresa el número de habitaciones"
+          />
+
+          <label>Baños:</label>
+          <input
+            type="number"
+            value="{{inmueble.6}}"
+            name="Banos"
+            placeholder="Ingresa el número de baños"
+          />
+
+          <label>Servicio:</label>
+          <select name="Servicio" id="">
+            <option value="{{inmueble.12}}">{{inmueble.12}}</option>
+            <option value="Arriendo">Arriendo</option>
+            <option value="Venta">Venta</option>
+          </select>
+
+          <label>Patio:</label>
+          <select name="Patio" id="">
+            <option value="{{inmueble.8}}">{{inmueble.8}}</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+
+          <label>Garaje:</label>
+          <select name="Garaje" id="">
+            <option value="{{inmueble.9}}">{{inmueble.9}}</option>
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
+
+          <label>Precio:</label>
+          <input
+            type="number"
+            value="{{inmueble.13}}"
+            name="Precio"
+            placeholder="Ingresa el precio"
+          />
+
+          <label>Codigo Arrendador:</label>
+          <select name="Arrendador" id="">
+            <option value="{{inmueble.14}}">{{inmueble.14}}</option>
+            {% for persona in personas %}
+            <option value="{{persona.0}}">{{persona.1}}</option>
+            {% endfor%}
+          </select>
+
+          <div class="button-group">
+            <button type="submit">Guardar</button>
+          </div>
+        </form>
+      </div>
+      <script src="/js/administrador.js"></script>
+      <script>
+        // Obtén el elemento textarea por su ID
+        var textarea = document.getElementById("textarea");
+
+        // Establece el valor predeterminado utilizando JavaScript
+        textarea.value = "{{inmueble.10}}";
+      </script>
+    </main>
+  </body>
+</html>

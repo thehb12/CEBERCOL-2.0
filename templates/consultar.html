@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='footer.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='header.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='consultar.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <div class="head">
+        <div class="logo">
+          <img
+            src="{{url_for('static',filename='/img/cebercolicon_1.ico')}}"
+            alt="logo de la marca"
+          />
+        </div>
+        <nav class="navbar">
+          <ul>
+            <li>
+              <a href="{{url_for('inteindex')}}">Inicio</a>
+            </li>
+            <li>
+              <a href="{{url_for('inteinmu')}}">Inmuebles</a>
+            </li>
+            <li>
+              <a href="#">Servicios</a>
+            </li>
+            <li><a href="{{url_for('consultar')}}">Contrato</a></li>
+            <li>
+              <a href="{{url_for('intelogin')}}">
+                <i class="fa-regular fa-user"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div id="consulta-form">
+        <form id="consulta-formulario">
+          <label for="cedula">Ingrese el número de cédula:</label>
+          <input
+            type="number"
+            id="cedula"
+            name="cedula"
+            placeholder="Ej. 123456789"
+          />
+          <button type="button" id="consultar-btn">Consultar</button>
+        </form>
+      </div>
+      <div id="resultado"></div>
+      <script>
+        const usuarios = [
+          {
+            cedula: 3040,
+            idContrato: 123456,
+            fecha_inicio: "2023-07-01",
+            fecha_final: "2023-12-31",
+          },
+          // Agrega aquí otros usuarios si es necesario
+        ];
+
+        document
+          .getElementById("consultar-btn")
+          .addEventListener("click", function () {
+            const cedulaConsulta = document.getElementById("cedula").value;
+            const usuarioEncontrado = usuarios.find(
+              (usuario) => usuario.cedula === parseInt(cedulaConsulta)
+            );
+            if (usuarioEncontrado) {
+              const resultadoDiv = document.getElementById("resultado");
+              resultadoDiv.innerHTML = `
+                <table class="table-style">
+                    <tr>
+                        <th>Cédula</th>
+                        <th>ID Contrato</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Final</th>
+                        <th>Ver Contrato</th>
+                    </tr>
+                    <tr>
+                        <td>${usuarioEncontrado.cedula}</td>
+                        <td>${usuarioEncontrado.idContrato}</td>
+                        <td>${usuarioEncontrado.fecha_inicio}</td>
+                        <td>${usuarioEncontrado.fecha_final}</td>
+                        <td><a><i id="recibosx" class="fa-regular fa-eye"></i></td>
+                    </tr>
+                </table>
+            `;
+              const verRecibosBtn = document.getElementById("recibosx");
+              verRecibosBtn.addEventListener("click", function () {
+                const reciboConsulta = usuarioEncontrado.idContrato;
+                const reciboEncontrado = recibos.find(
+                  (recibo) => recibo.idContrato === parseInt(reciboConsulta)
+                );
+                if (reciboEncontrado) {
+                  resultadoDiv.innerHTML = `
+                        <table class="table-style">
+                            <tr>
+                                <th>ID Recibo</th>
+                                <th>Fecha Pago</th>
+                                <th>Cuota</th>
+                            </tr>
+                            <tr>
+                                <td>${reciboEncontrado.idRecibo}</td>
+                                <td>${reciboEncontrado.fecha_pago}</td>
+                                <td>${reciboEncontrado.cuota}</td>
+                            </tr>
+                        </table>
+                    `;
+                } else {
+                  alert("Recibo no encontrado");
+                }
+              });
+            } else {
+              alert("Usuario no encontrado");
+            }
+          });
+        const recibos = [
+          {
+            idContrato: 123456,
+            idRecibo: 123,
+            cuota: 3040,
+            fecha_pago: "2023-07-01",
+          },
+        ];
+        // Agrega aquí otros recibos si es necesario
+      </script>
+    </main>
+    <footer>
+      <div class="social">
+        <div class="wpp">
+          <h2>WhatsApp</h2>
+          <a href="https://wa.me/573204991618">
+            <img
+              src="{{url_for('static',filename='/img/wpp.png')}}"
+              alt="WhatsApp"
+            />
+          </a>
+        </div>
+        <div class="fb">
+          <h2>Facebook</h2>
+          <a href="https://www.facebook.com/juanfe.cabralesbarbaran/">
+            <img
+              src="{{url_for('static',filename='/img/fc.jpg')}}"
+              alt="Facebook"
+            />
+          </a>
+        </div>
+        <div class="ig">
+          <h2>Instagram</h2>
+          <a href="https://www.instagram.com/juantosx/">
+            <img
+              src="{{url_for('static',filename='/img/instagram.png')}}"
+              alt="Instagram"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="datos">
+        <h2>Cesar albereto maradona</h2>
+        <p>
+          Nosotros sabemos que yo se que nada se, yo se que algo no se pero se
+          que algo usted no sabe que yo tampoco se. -Arcangel
+        </p>
+      </div>
+      <div class="mapa">
+        <div>
+          <a
+            href="https://www.google.com/maps/place/Cra.+19+%2319-7,+Barrancabermeja,+Santander/@7.0586298,-73.8584949,18z/data=!4m5!3m4!1s0x8e42eca46cca93b9:0xc9eeb5bfcfb604c1!8m2!3d7.0585614!4d-73.8584984"
+            ><img
+              src="{{url_for('static',filename='/img/pin-de-ubicacion.png')}}"
+              alt="Ubicacion"
+            />
+          </a>
+          <p>Carrera 19 #19-7</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

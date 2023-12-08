@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+/* Ocultar el valor del atributo "value" */
+datalist option {
+    display: none;
+}
+/* Estilo general del cuerpo de la página */
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Encabezado */
+header {
+    background-color: #2ecc71;
+    /* Cambiado a verde (#2ecc71) */
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+} */
+
+.navbar-left span {
+    font-weight: bold;
+}
+
+.navbar-right a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+/* Contenedor principal */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de la tabla de inmuebles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ccc;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #2ecc71;
+    /* Cambiado a verde (#2ecc71) */
+    color: #fff;
+}
+
+/* Estilo de los formularios */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+select {
+    appearance: none;
+}
+
+/* Estilo de los botones */
+
+.button-group {
+    text-align: right;
+}
+
+button[type="submit"] {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Estilo de la lista scrollable */
+.scrollable-list {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+td a {
+    display: inline-block;
+    margin-right: 5px;
+    text-decoration: none;
+    color: #333;
+    padding: 5px 10px;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+td a:hover {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+/* Alinea el contenido de la última columna al centro */
+td:last-child {
+    text-align: center;
+}
+
+thead {
+    background-color: #333;
+    color: #fff;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.pagination a, .pagination .current-page {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 12px;
+    text-decoration: none;
+    background-color: #1ecd2d;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #077412;
+}
+
+.pagination .current-page {
+    background-color: #1ecd2d;
+    cursor: default;
+}
+
+.first-page {
+    background-color: #1ecd2d; /* Define el color verde para el enlace 'Primera' */
+    /* Otros estilos si es necesario */
+}
+
+div {
+    display: inline-block;
+    margin-right: 10px; /* Ajusta el margen entre los campos si lo deseas */
+}
+
+label {
+    display: block; /* Coloca cada etiqueta en una nueva línea */
+}
+
+/* Agrega este bloque en tu archivo administrador.css o en la sección de estilos de tu HTML */
+.filtro-container div {
+    display: inline-block;
+    margin-right: 10px; /* Puedes ajustar este valor según tus preferencias */
+  }
+  

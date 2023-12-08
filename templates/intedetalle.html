@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intedetalles</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='footer.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='header.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='detalles.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.1/dist/js/splide.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="head">
+        <div class="logo">
+          <img
+            src="{{url_for('static',filename='/img/cebercolicon_1.ico')}}"
+            alt="logo de la marca"
+          />
+        </div>
+        <nav class="navbar">
+          <ul>
+            <li>
+              <a href="{{url_for('inteindex')}}">Inicio</a>
+            </li>
+            <li>
+              <a href="{{url_for('inteinmu')}}">Inmuebles</a>
+            </li>
+            <li>
+              <a href="#">Servicios</a>
+            </li>
+            <li><a href="{{url_for('consultar')}}">Contrato</a></li>
+            <li>
+              <a href="{{url_for('intelogin')}}">
+                <i class="fa-regular fa-user"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="main">
+      {% for inmueble in inmuebles %}
+      <div class="todo">
+        <div class="carrusel">
+          <section
+            id="main-slider"
+            class="splide"
+            aria-label="My Awesome Gallery"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                <li class="splide__slide">
+                  <img
+                    src="{{url_for('static',filename='/img/ejm2.jpg')}}"
+                    alt=""
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    src="{{url_for('static',filename='/img/ejm2.jpg')}}"
+                    alt=""
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    src="{{url_for('static',filename='/img/ejm2.jpg')}}"
+                    alt=""
+                  />
+                </li>
+                <li class="splide__slide">
+                  <img
+                    src="{{url_for('static',filename='/img/ejm2.jpg')}}"
+                    alt=""
+                  />
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <ul id="thumbnails" class="thumbnails">
+            <li class="thumbnail">
+              <img
+                src="{{url_for('static',filename='/img/ejm2.jpg')}}"
+                alt=""
+              />
+            </li>
+            <li class="thumbnail">
+              <img
+                src="{{url_for('static',filename='/img/ejm2.jpg')}}"
+                alt=""
+              />
+            </li>
+            <li class="thumbnail">
+              <img
+                src="{{url_for('static',filename='/img/ejm2.jpg')}}"
+                alt=""
+              />
+            </li>
+            <li class="thumbnail">
+              <img
+                src="{{url_for('static',filename='/img/ejm2.jpg')}}"
+                alt=""
+              />
+            </li>
+          </ul>
+        </div>
+        <div class="box">
+          <table>
+            <th colspan="4">Informacion del inmueble</th>
+            <tr>
+              <td>Tipo:</td>
+              <td>{{inmueble.11}}</td>
+            </tr>
+            <tr>
+              <td>Ubicacion:</td>
+              <td>{{inmueble.17}}</td>
+            </tr>
+            <tr>
+              <td>Habitaciones:</td>
+              <td>{{inmueble.7}}</td>
+            </tr>
+            <tr>
+              <td>Baños:</td>
+              <td>{{inmueble.6}}</td>
+            </tr>
+            <tr>
+              <td>Patio:</td>
+              <td>{{inmueble.8}}</td>
+            </tr>
+            <tr>
+              <td>Garaje:</td>
+              <td>{{inmueble.9}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="box2">
+          <table>
+            <thead>
+              <th>Descripcion</th>
+            </thead>
+            <tbody>
+              <td>{{inmueble.10}}</td>
+            </tbody>
+          </table>
+        </div>
+        <div class="model" id="model">
+          <div class="formc">
+            <form action="">
+              <div class="asd">
+                <label for="">AGENDAR VISITA</label>
+              </div>
+              <div class="">
+                <label for="">Nombre</label>
+                <input type="text" placeholder="Nombre" class="" />
+              </div>
+              <div class="">
+                <label for="">Telefono</label>
+                <input type="text" placeholder="Telefono" class="" />
+              </div>
+              <button type="submit">Enviar Solicitud</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <script>
+        var splide = new Splide("#main-slider", {
+          width: 600,
+          height: 300,
+          pagination: false,
+          cover: true,
+        });
+
+        var thumbnails = document.getElementsByClassName("thumbnail");
+        var current;
+
+        for (var i = 0; i < thumbnails.length; i++) {
+          initThumbnail(thumbnails[i], i);
+        }
+
+        function initThumbnail(thumbnail, index) {
+          thumbnail.addEventListener("click", function () {
+            splide.go(index);
+          });
+        }
+
+        splide.on("mounted move", function () {
+          var thumbnail = thumbnails[splide.index];
+
+          if (thumbnail) {
+            if (current) {
+              current.classList.remove("is-active");
+            }
+
+            thumbnail.classList.add("is-active");
+            current = thumbnail;
+          }
+        });
+
+        splide.mount();
+      </script>
+      <script src="/js/intedetalles.js"></script>
+    </main>
+    <footer>
+      <div class="social">
+        <div class="wpp">
+          <h2>WhatsApp</h2>
+          <a href="https://wa.me/573204991618">
+            <img
+              src="{{url_for('static',filename='/img/wpp.png')}}"
+              alt="WhatsApp"
+            />
+          </a>
+        </div>
+        <div class="fb">
+          <h2>Facebook</h2>
+          <a href="https://www.facebook.com/juanfe.cabralesbarbaran/">
+            <img
+              src="{{url_for('static',filename='/img/fc.jpg')}}"
+              alt="Facebook"
+            />
+          </a>
+        </div>
+        <div class="ig">
+          <h2>Instagram</h2>
+          <a href="https://www.instagram.com/juantosx/">
+            <img
+              src="{{url_for('static',filename='/img/instagram.png')}}"
+              alt="Instagram"
+            />
+          </a>
+        </div>
+      </div>
+      <div class="datos">
+        <h2>Cesar albereto maradona</h2>
+        <p>
+          Nosotros sabemos que yo se que nada se, yo se que algo no se pero se
+          que algo usted no sabe que yo tampoco se. -Arcangel
+        </p>
+      </div>
+      <div class="mapa">
+        <div>
+          <a
+            href="https://www.google.com/maps/place/Cra.+19+%2319-7,+Barrancabermeja,+Santander/@7.0586298,-73.8584949,18z/data=!4m5!3m4!1s0x8e42eca46cca93b9:0xc9eeb5bfcfb604c1!8m2!3d7.0585614!4d-73.8584984"
+          >
+            <img
+              src="{{url_for('static',filename='/img/pin-de-ubicacion.png')}}"
+              alt="Ubicacion"
+            />
+          </a>
+          <p>Carrera 19 #19-7</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

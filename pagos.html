@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Pagos</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .checkbox-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .checkbox-group input {
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #totalPagar {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Registro de Pagos Mensuales</h2>
+        <form id="paymentForm">
+            <label>Codigo contrato:</label>
+            <select name="codigoContrato">
+                <option value="">Seleccionar</option>
+                {% for contrato in contratos %}
+                <option value="{{contrato.0}}">{{contrato.0}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="monto">Monto:</label>
+            <input type="number" value="{{contratos.2}}" id="monto" name="monto" readonly>
+
+            <label for="plazo">Plazo:</label>
+            <input type="number" value="{{contratos.1}}" id="plazo" name="plazo" readonly>
+
+            <div class="checkbox-group" id="checkboxGroup"></div>
+
+            <div id="totalPagar"></div>
+            <button type="submit">Registrar Pago</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('plazo').addEventListener('change', function () {
+            generateCheckboxes(this.value);
+        });
+
+        document.getElementById('paymentForm').addEventListener('input', function () {
+            calculateTotal();
+        });
+
+        function generateCheckboxes(plazo) {
+            const checkboxGroup = document.getElementById('checkboxGroup');
+            checkboxGroup.innerHTML = '';
+
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+            const currentDate = new Date();
+            const currentMonth = currentDate.getMonth();
+
+            const montoInicial = document.getElementById('monto').value;
+
+            for (let i = 0; i < plazo; i++) {
+                const monthIndex = (currentMonth + i) % 12;
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = `mes${monthIndex + 1}`; // Asignar name según el mes
+                checkbox.value = monthIndex + 1;
+                checkbox.id = `mes${monthIndex + 1}`;
+                checkbox.className = `checkbox-${meses[monthIndex].toLowerCase()}`; // Asignar classname según el mes
+
+                const label = document.createElement('label');
+                label.htmlFor = `mes${monthIndex + 1}`;
+                label.appendChild(document.createTextNode(`${meses[monthIndex]} - Monto: $${montoInicial}`));
+
+                checkboxGroup.appendChild(label);
+                label.appendChild(checkbox);
+            }
+        }
+
+        function calculateTotal() {
+            const checkboxes = document.querySelectorAll('input[name^="mes"]:checked');
+            let total = 0;
+
+            checkboxes.forEach(checkbox => {
+                const montoInicial = document.getElementById('monto').value;
+                total += parseFloat(montoInicial) || 0;
+            });
+
+            document.getElementById('totalPagar').innerText = `Total a pagar: $${total}`;
+        }
+
+        // Generar checkboxes al cargar la página
+        generateCheckboxes(document.getElementById('plazo').value);
+    </script>
+
+
+</body>
+
+</html>

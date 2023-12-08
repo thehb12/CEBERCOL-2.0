@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    height: 10%;
+}
+
+main p {
+    color: #fff;
+    font-size: 0.8rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 90%;
+}
+
+.container-box {
+    margin-top: 2%;
+    margin-right: 7%;
+    margin-left: 7%;
+    text-align: justify;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    margin-top: 5%;
+}
+
+.container-button {
+    width: 60%;
+}
+
+.container-button-spacio {
+    width: 60%;
+    margin: 380px auto;
+}
+
+
+
+.contenedor1 {
+    background-image: url(/static/img/ejemplo.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    background-size: 100%;
+    overflow: hidden;;
+}
+
+.contenedor2 {
+    width: 100%;
+    display: flex;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.banner {
+    margin-top: 1%;
+    margin-left: 70%;
+    height: 95%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.648);
+}
+
+.banner_texto {
+    color: #fff;
+    margin-left: 5%;
+    margin-right: 5%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.banner_texto img {
+    margin-top: 10%;
+    width: 80%;
+}
+/*  */
+
+
+
+/*  */
+.carta {
+    width: 100%;
+    margin: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: opx 1px 10px rgba(0,0,0,0.2);
+    cursor: default;
+    transition: all 400ms ease;
+}
+
+.carta:hover {
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+    transform: translateY(-3%);
+}
+
+.carta img {
+    width: 100%;
+    height: 250px;
+}
+
+.carta .contenido {
+    padding: 15px;
+    text-align: center;
+}
+
+.carta .contenido p{
+    line-height: 1.5;
+    color: #6a6a6a;
+}
+
+.carta .contenido h3{
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.carta .contenido a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    margin-top: 10px;
+    color: #2fb4cc;
+    border: 1px solid #2fb4cc;
+    border-radius: 4px;
+    transition: all 400ms ease;
+}
+
+.carta .contenido a:hover{
+    background: #2fb4cc;
+    color: #fff;
+}
+
+/* Estilos para dispositivos móviles y tablets */
+@media screen and (max-width: 720px) {
+    body {
+        font-size: 14px;
+    }
+
+    .contenedor2 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .carta {
+        width: 80%;
+        margin: 20px 0;
+    }
+
+    .banner {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+/* Estilos para tablets (entre 768px y 1024px) */
+@media screen and (min-width: 720px) and (max-width: 1024px) {
+    .carta {
+        width: 45%;
+    }
+}
+
+.contenedor {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titulo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.tabla-servicios {
+    display: table;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.fila {
+    display: table-row;
+}
+
+.servicio {
+    display: table-cell;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
