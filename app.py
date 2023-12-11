@@ -1,9 +1,8 @@
-<<<<<<< HEAD
+
 from flask import Flask, render_template, request, url_for, redirect, flash, Response,  jsonify
-=======
+
 from flask import jsonify
 from flask import Flask, render_template, request, url_for, redirect, flash, Response
->>>>>>> c2eedc1eaedeaaca62475901a32c670f6b3b410a
 from flask_mysqldb import MySQL
 import pymysql
 app = Flask(__name__)

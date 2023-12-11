@@ -68,7 +68,7 @@
           {% if current_page < total_pages %} <a href="{{ url_for('recibos', page=current_page + 1) }}">Siguiente</a>
             {% endif %}
       </div>
-      <div class="container">
+      <div class="contenido">
         <h2>Registro de Pagos Mensuales</h2>
 
         <form id="paymentForm" action="/add_recibo" method="post">
@@ -93,7 +93,7 @@
           <input type="hidden" id="Cuota" name="Cuota">
           <button type="submit">Registrar Pago</button>
         </form>
-        <!-- <button type="button" onclick="mostrarValores()">Mostrar Valores</button> -->
+        <button type="button" onclick="mostrarValores()">Mostrar Valores</button>
       </div>
       <script>
         function mostrarValores() {
@@ -105,10 +105,10 @@
       </script>
       <script>
         const currentDate = new Date();
-
+      
         document.getElementById('codigoContrato').addEventListener('change', function () {
           const codigoContrato = this.value;
-
+      
           // Realizar una solicitud AJAX para obtener la información del contrato seleccionado
           fetch(`/obtener_contrato/${codigoContrato}`)
             .then(response => response.json())
@@ -116,42 +116,42 @@
               console.log('Información del contrato:', data);
               document.getElementById('monto').value = data.canon;
               document.getElementById('plazo').value = data.plazo;
-
+      
               // Generar checkboxes después de obtener la información del contrato
               generateCheckboxes(data.plazo);
             })
             .catch(error => console.error('Error:', error));
         });
-
+      
         document.getElementById('plazo').addEventListener('change', function () {
           console.log('Plazo cambiado:', this.value);
           generateCheckboxes(this.value);
         });
-
+      
         document.getElementById('paymentForm').addEventListener('submit', function (event) {
           event.preventDefault();
-
+      
           // Setear los valores de fecha y cuota antes de enviar el formulario
           document.getElementById('CurrentDate').value = currentDate.toISOString().split('T')[0];
           document.getElementById('Cuota').value = calculateTotal();
-
+      
           // Ahora puedes enviar el formulario
           this.submit();
         });
-
+      
         // Generar checkboxes al cargar la página
         generateCheckboxes(document.getElementById('plazo').value);
-
+      
         function generateCheckboxes(plazo) {
           console.log('Generando checkboxes para plazo:', plazo);
           const checkboxGroup = document.getElementById('checkboxGroup');
           checkboxGroup.innerHTML = '';
-
+      
           const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-
+      
           const currentMonth = currentDate.getMonth();
           const montoInicial = document.getElementById('monto').value;
-
+      
           for (let i = 0; i < plazo; i++) {
             const monthIndex = (currentMonth + i) % 12;
             const checkbox = document.createElement('input');
@@ -160,26 +160,28 @@
             checkbox.value = monthIndex + 1;
             checkbox.id = `mes${monthIndex + 1}`;
             checkbox.className = `checkbox-${meses[monthIndex].toLowerCase()}`;
-
+      
+            // Agregar evento de cambio para recalcular el total en tiempo real
+            checkbox.addEventListener('change', calculateTotal);
+      
             const label = document.createElement('label');
             label.htmlFor = `mes${monthIndex + 1}`;
-            label.appendChild(document.createTextNode(`${meses[monthIndex]} - Monto: $${montoInicial}`));
-
+            label.appendChild(document.createTextNode(`${meses[monthIndex]} - $${montoInicial}`));
+      
             checkboxGroup.appendChild(label);
             label.appendChild(checkbox);
           }
         }
-
-
+      
         function calculateTotal() {
           const checkboxes = document.querySelectorAll('input[name^="mes"]:checked');
           let total = 0;
-
+      
           checkboxes.forEach(checkbox => {
             const montoInicial = document.getElementById('monto').value;
             total += parseFloat(montoInicial) || 0;
           });
-
+      
           document.getElementById('totalPagar').innerText = `Total a pagar: $${total}`;
           return total;
         }

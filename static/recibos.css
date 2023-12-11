@@ -45,19 +45,25 @@ select {
 }
 
 .checkbox-group {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-}
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Tres columnas de tamaño igual */
+    gap: 10px; /* Espaciado entre las columnas */
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
 
 .checkbox-group label {
-    display: flex;
+    /* display: flex; */
+    
     align-items: center;
-    margin-bottom: 8px;
+    /* margin-bottom: 8px; */
 }
 
 .checkbox-group input {
     margin-right: 5px;
+    
 }
 
 button {
@@ -255,3 +261,88 @@ thead {
     /* Define el color verde para el enlace 'Primera' */
     /* Otros estilos si es necesario */
 }
+
+.contenido {
+    width: 50%;
+    margin: 0 auto;
+    border: 2px solid #333;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  select,
+  input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  /* Estilo del cuadro de selección personalizado */
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  /* Estilo del indicador de selección personalizado */
+  select::-ms-expand {
+    display: none;
+  }
+  
+  .checkbox-group {
+    margin-top: 10px;
+  }
+  
+  #totalPagar {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  #pagoMensaje {
+    margin-top: 10px;
+    color: #4caf50;
+    font-weight: bold;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+
+
+
+  .labelscontratos{
+    display: flex;
+    justify-content: space-between;
+    background-color: red;
+    width: 100%;
+    align-items: center;
+  }
