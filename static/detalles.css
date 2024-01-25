@@ -502,3 +502,13 @@ table {
     background-color: green;
 }
 
+/* Estilos para dispositivos con un ancho máximo de 768px (ajusta según tus necesidades) */
+@media only screen and (max-width: 768px) {
+    .propiedad {
+      width: calc((100% / 2) - 40px);
+    }
+  
+    table {
+      width: 100%;
+    }
+  }
