@@ -184,7 +184,7 @@ body {
 }
 
 .three-column-table td {
-  border: 1px solid #ddd;
+  border: 3px solid #ddd;
   padding: 15px;
   text-align: center;
 }
@@ -212,7 +212,7 @@ body {
 .servicio {
   display: table-cell;
   padding: 10px;
-  border: 1px solid #000000;
+  border: 3px solid #000000;
   text-align: center;
 }
 
