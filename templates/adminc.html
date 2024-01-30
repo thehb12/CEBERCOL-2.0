@@ -77,7 +77,7 @@
           {% if current_page < total_pages %} <a href="{{ url_for('contratos', page=current_page + 1) }}">Siguiente</a>
             {% endif %}
       </div>
-      <form action="/add_contrato" method="POST">
+      <form id="formularioContrato" action="/add_contrato" method="POST">
         <label>Codigo inmueble:</label>
         <select name="CodigoInmueble">
           <option value="0">Seleccionar</option>
@@ -96,13 +96,13 @@
         </select>
         <label>Plazo(meses):</label>
         <input type="number" id="plazo" name="Plazo" placeholder="Ingresa el plazo" />
-
+      
         <label>Fecha inicio:</label>
         <input type="date" id="fechaInicio" name="FechaInicio" placeholder="Ingresa la fecha de inicio" />
-
+      
         <label>Fecha fin:</label>
         <input type="date" id="fechaFin" name="FechaFin" placeholder="Fecha de fin calculada" readonly />
-
+      
         <label>Canon:</label>
         <input type="number" name="Canon" placeholder="Ingresar el valor" />
         <div class="button-group">

@@ -78,26 +78,33 @@
             {% endif %}
       </div>
 
-      <form action="add_persona" method="POST">
-        <label>Nombre:</label>
-        <input type="text" name="Nombre" placeholder="Ingresa el nombre" />
-        <label>Correo:</label>
-        <input type="email" name="Correo" placeholder="Ingresa el correo" />
-        <label>Direccion:</label>
-        <input type="text" name="Direccion" placeholder="Ingresa la direccion" />
-        <label>Telefono:</label>
-        <input type="number" name="Telefono" placeholder="Ingresa el telefono" />
-        <label>Rol:</label>
-        <select name="Rol">
-          <option value="">Seleccionar</option>
-          <option value="Inquilino">Inquilino</option>
-          <option value="Propietario">Propietario</option>
-        </select>
-        <label>Cedula:</label>
-        <input type="text" name="Cedula" placeholder="Ingresar la cedula" />
-
-        <div class="button-group">
-          <button type="submit">Agregar</button>
+      <form id="formularioPersona" action="add_persona" method="POST">
+        <!-- Sección izquierda -->
+        <div>
+          <label>Nombre:</label>
+          <input type="text" name="Nombre" placeholder="Ingresa el nombre" />
+          <label>Correo:</label>
+          <input type="email" name="Correo" placeholder="Ingresa el correo" />
+          <label>Direccion:</label>
+          <input type="text" name="Direccion" placeholder="Ingresa la direccion" />
+        </div>
+      
+        <!-- Sección derecha -->
+        <div>
+          <label>Telefono:</label>
+          <input type="number" name="Telefono" placeholder="Ingresa el telefono" />
+          <label>Rol:</label>
+          <select name="Rol">
+            <option value="">Seleccionar</option>
+            <option value="Inquilino">Inquilino</option>
+            <option value="Propietario">Propietario</option>
+          </select>
+          <label>Cedula:</label>
+          <input type="text" name="Cedula" placeholder="Ingresar la cedula" />
+      
+          <div class="button-group">
+            <button type="submit">Agregar</button>
+          </div>
         </div>
       </form>
     </div>

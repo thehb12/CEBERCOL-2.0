@@ -88,19 +88,112 @@ th {
 }
 
 /* Estilo de los formularios */
-form {
+/* form {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+} */
 
-label {
+.form-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-section {
+    flex: 0 0 38%; /* Ajusta el ancho según tus necesidades */
+  }
+
+  .panel .form-container-update {
+    display: flex;
+    justify-content: center;
+  }
+
+  .panel .form-section-update {
+    flex: 0 0 38%; /* Ajusta el ancho según tus necesidades */
+  }
+
+  .panel label {
+    width: 150px; 
+    display: inline-block;
+  }
+
+  .form-container-updatec {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .form-section-updatec {
+    flex: 0 0 38%;
+  }
+/* label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+} */
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+.form-container-update {
+    display: flex;
+    justify-content: center;
+}
+
+.form-section-update {
+    margin: 0 10px; /* Ajusta el margen entre las secciones según tus preferencias */
+}
+
+.button-group {
+    margin-top: 20px; /* Ajusta el margen según tus preferencias */
+}
+
+#formularioContrato {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#formularioContrato label,
+#formularioContrato input,
+#formularioContrato select {
+    margin-bottom: 10px; /* Ajusta el margen según tus preferencias */
+}
+
+#formularioContrato .button-group {
+    margin-top: 20px; /* Ajusta el margen según tus preferencias */
+}
+
+#contenedorFormulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#formularioPersona {
+    display: flex;
+}
+
+#formularioPersona label,
+#formularioPersona input,
+#formularioPersona select {
+    margin-bottom: 10px; /* Ajusta el margen según tus preferencias */
+}
+
+#formularioPersona .button-group {
+    margin-top: 20px; /* Ajusta el margen según tus preferencias */
+    width: 100%; /* Ajusta el ancho según tus preferencias */
+}
+
+
 
 input[type="text"],
 input[type="number"],

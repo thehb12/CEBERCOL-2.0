@@ -207,15 +207,14 @@ def obtener_contrato(codigo_contrato):
 @app.route('/add_recibo', methods=['POST'])
 def add_recibo():
     if request.method == 'POST':
-        Codigo_contrato = request.form['codigoContrato']
-        Fecha_pago = request.form['CurrentDate']
-        Cuota = request.form['Cuota']
+        codigo_contrato = request.form['codigoContrato']
+        fecha_pago = request.form['CurrentDate']
+        cuota = request.form['Cuota']
 
         # Obtén los valores booleanos de los meses del formulario
         meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
                  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
-        meses_bool = {mes: request.form.get(
-            f'mes{i + 1}') == 'on' for i, mes in enumerate(meses)}
+        meses_bool = {mes: request.form.get(mes) == 'on' for  mes in meses}
 
         # Configuración de la base de datos y cursor (puedes ajustar esto según tu lógica)
         cur = mysql.connection.cursor()
@@ -224,9 +223,13 @@ def add_recibo():
         campos = ', '.join(meses_bool.keys())
         valores = ', '.join(['%s' for _ in meses_bool])
 
+        valores_tuple=(codigo_contrato,fecha_pago,cuota) + \
+            tuple(meses_bool.values())
+        valores_tuple += (False,) * (len(meses) - len(meses_bool))
+
         cur.execute(
             f'INSERT INTO recibos(codigo_contrato, fecha_pago, cuota, {campos}) VALUES (%s, %s, %s, {valores})',
-            (Codigo_contrato, Fecha_pago, Cuota) + tuple(meses_bool.values())
+            valores_tuple
         )
 
         mysql.connection.commit()
@@ -543,40 +546,6 @@ def inteinmu():
 @app.route('/contratod')
 def contratod():
     return render_template('adminc-directo.html')
-
-# @app.route('/buscar_propiedades', methods=['POST'])
-# def buscar_propiedades():
-#     # Obtiene los datos del formulario
-#     servicios = request.form['servicios']
-#     inmuebles = request.form['inmuebles']
-#     comuna = request.form['comuna']
-
-#     # Realiza la búsqueda en la base de datos
-#     cursor = mysql.connection.cursor()
-#     consulta = """
-#         SELECT * FROM tu_tabla
-#         WHERE servicios LIKE %s
-#         AND inmuebles LIKE %s
-#         AND comuna LIKE %s
-#     """
-#     cursor.execute(consulta, ('%' + servicios + '%', '%' + inmuebles + '%', '%' + comuna + '%'))
-#     propiedades = cursor.fetchall()
-
-#     # Convierte los resultados en una lista de diccionarios para el formato JSON
-#     column_names = [i[0] for i in cursor.description]
-#     propiedades_list = []
-#     for row in propiedades:
-#         propiedades_dict = dict(zip(column_names, row))
-#         propiedades_list.append(propiedades_dict)
-
-#     # Cierra el cursor
-#     cursor.close()
-
-#     # Devuelve los resultados en formato JSON
-#     return jsonify(propiedades_list)
-
-
-
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

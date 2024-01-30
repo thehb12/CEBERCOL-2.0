@@ -156,10 +156,9 @@
             const monthIndex = (currentMonth + i) % 12;
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.name = `mes${monthIndex + 1}`; // Usa el mismo nombre que en el formulario Python
-            checkbox.value = monthIndex + 1;
+            checkbox.name = `${meses[monthIndex].toLowerCase()}`; // Usa el mismo nombre que en el formulario Python
             checkbox.id = `mes${monthIndex + 1}`;
-            checkbox.className = `checkbox-${meses[monthIndex].toLowerCase()}`;
+            checkbox.className = `checkbox-${meses[monthIndex].toLowerCase()}`; 
       
             // Agregar evento de cambio para recalcular el total en tiempo real
             checkbox.addEventListener('change', calculateTotal);
@@ -174,7 +173,7 @@
         }
       
         function calculateTotal() {
-          const checkboxes = document.querySelectorAll('input[name^="mes"]:checked');
+          const checkboxes = document.querySelectorAll('input[id^="mes"]:checked');
           let total = 0;
       
           checkboxes.forEach(checkbox => {

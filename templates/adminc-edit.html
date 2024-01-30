@@ -26,30 +26,39 @@
     <main>
         <div class="panel">
             <form action="/updatec/{{contrato.0}}" method="POST">
-                <label>Codigo inmueble:</label>
-                <input type="number" value="{{contrato.5}}" name="CodigoInmueble"
-                    placeholder="Ingresa Codigo del inmueble">
-                <label>Codigo arrendatario:</label>
-                <input type="number" value="{{contrato.6}}" name="CodigoArrendatario"
-                    placeholder="Ingresa Codigo del arrendatario">
-                <label>Plazo(meses):</label>
-                <input type="number" value="{{contrato.1}}" id="plazo" name="Plazo" placeholder="Ingresa el plazo" />
-
-                <label>Fecha inicio:</label>
-                <input type="date" value="{{contrato.3}}" id="fechaInicio" name="FechaInicio"
+              <label>Codigo inmueble:</label>
+              <input type="number" value="{{contrato.5}}" name="CodigoInmueble"
+                placeholder="Ingresa Codigo del inmueble">
+              <label>Codigo arrendatario:</label>
+              <input type="number" value="{{contrato.6}}" name="CodigoArrendatario"
+                placeholder="Ingresa Codigo del arrendatario">
+              <label>Plazo(meses):</label>
+              <input type="number" value="{{contrato.1}}" id="plazo" name="Plazo" placeholder="Ingresa el plazo" />
+          
+              <div class="form-container-updatec">
+                <!-- Sección izquierda -->
+                <div class="form-section-updatec">
+                  <label>Fecha inicio:</label>
+                  <input type="date" value="{{contrato.3}}" id="fechaInicio" name="FechaInicio"
                     placeholder="Ingresa la fecha de inicio" />
-
-                <label>Fecha fin:</label>
-                <input type="date" value="{{contrato.4}}" id="fechaFin" name="FechaFin"
-                    placeholder="Fecha de fin calculada" readonly />
-
-                <label>Canon:</label>
-                <input type="number" value="{{contrato.2}}" name="Canon" placeholder="Ingresar el valor">
-                <div class="button-group">
-                    <button type="submit">Guardar</button>
                 </div>
+          
+                <!-- Sección derecha -->
+                <div class="form-section-updatec">
+                  <label>Fecha fin:</label>
+                  <input type="date" value="{{contrato.4}}" id="fechaFin" name="FechaFin"
+                    placeholder="Fecha de fin calculada" readonly />
+          
+                  <label>Canon:</label>
+                  <input type="number" value="{{contrato.2}}" name="Canon" placeholder="Ingresar el valor">
+                </div>
+              </div>
+          
+              <div class="button-group">
+                <button type="submit">Guardar</button>
+              </div>
             </form>
-        </div>
+          </div>
     </main>
 </body>
 <script>

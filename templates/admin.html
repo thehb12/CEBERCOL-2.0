@@ -90,63 +90,72 @@
       <form action="/add_inmueble" method="POST" enctype="multipart/form-data">
         <label>Agregar información:</label>
         <input type="file" name="Foto" accept="image*" multiple />
-
-        <label>Descripción:</label>
-        <textarea name="Descripcion" placeholder="Ingresa la descripción"></textarea>
-
-        <label>Tipo de inmueble:</label>
-        <select name="Tipo" id="">
-          <option value="">Seleccionar</option>
-          <option value="Casa">Casas</option>
-          <option value="Apartamento">Apartamentos</option>
-          <option value="Apartaestudio">Apartaestudios</option>
-          <option value="Oficina">Oficinas</option>
-          <option value="Bodega">Bodegas</option>
-          <option value="Local">Locales</option>
-        </select>
-
-        <label>Ubicación:</label>
-        <input type="number" name="Ubicacion" placeholder="Ingresa la ubicación" />
-
-        <label>Habitaciones:</label>
-        <input type="number" name="Habitaciones" placeholder="Ingresa el número de habitaciones" />
-
-        <label>Baños:</label>
-        <input type="number" name="Banos" placeholder="Ingresa el número de baños" />
-
-        <label>Servicio:</label>
-        <select name="Servicio" id="">
-          <option value="">Seleccionar</option>
-          <option value="Arriendo">Arriendo</option>
-          <option value="Venta">Venta</option>
-        </select>
-
-        <label>Patio:</label>
-        <select name="Patio" id="">
-          <option value="">Seleccionar</option>
-          <option value="Si">Si</option>
-          <option value="No">No</option>
-        </select>
-
-        <label>Garaje:</label>
-        <select name="Garaje" id="">
-          <option value="">Seleccionar</option>
-          <option value="Si">Si</option>
-          <option value="No">No</option>
-        </select>
-
-        <label>Precio:</label>
-        <input type="number" name="Precio" placeholder="Ingresa el precio" />
-
-        <label>Codigo Propietario:</label>
-        <input type="text" list="opciones" name="Arrendador" id="ArrendadorInput" oninput="filtrarOpciones()"
-          onchange="seleccionarOpcion()">
-        <datalist id="opciones">
-          {% for persona in personas %}
-          <option value="{{ persona.0 }}" data-custom="{{ persona.3 }}-{{ persona.1 }}">C.C.{{ persona.3 }}-{{ persona.1
-            }}</option>
-          {% endfor %}
-        </datalist>
+      
+        <div class="form-container">
+          <!-- Sección izquierda -->
+          <div class="form-section">
+            <label>Descripción:</label>
+            <textarea name="Descripcion" placeholder="Ingresa la descripción"></textarea>
+      
+            <label>Tipo de inmueble:</label>
+            <select name="Tipo" id="">
+              <option value="">Seleccionar</option>
+              <option value="Casa">Casas</option>
+              <option value="Apartamento">Apartamentos</option>
+              <option value="Apartaestudio">Apartaestudios</option>
+              <option value="Oficina">Oficinas</option>
+              <option value="Bodega">Bodegas</option>
+              <option value="Local">Locales</option>
+      
+            </select>
+      
+            <label>Ubicación:</label>
+            <input type="number" name="Ubicacion" placeholder="Ingresa la ubicación" />
+      
+            <label>Habitaciones:</label>
+            <input type="number" name="Habitaciones" placeholder="Ingresa el número de habitaciones" />
+      
+            <label>Baños:</label>
+            <input type="number" name="Banos" placeholder="Ingresa el número de baños" />
+          </div>
+      
+          <!-- Sección derecha -->
+          <div class="form-section">
+            <label>Patio:</label>
+            <select name="Patio" id="">
+              <option value="">Seleccionar</option>
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+      
+            <label>Garaje:</label>
+            <select name="Garaje" id="">
+              <option value="">Seleccionar</option>
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+      
+            <label>Precio:</label>
+            <input type="number" name="Precio" placeholder="Ingresa el precio" />
+      
+            <label>Codigo Propietario:</label>
+            <input type="text" list="opciones" name="Arrendador" id="ArrendadorInput" oninput="filtrarOpciones()"
+              onchange="seleccionarOpcion()">
+              <label>Servicio:</label>
+              <select name="Servicio" id="">
+                <option value="">Seleccionar</option>
+                <option value="Arriendo">Arriendo</option>
+                <option value="Venta">Venta</option>
+              </select>
+            <datalist id="opciones">
+              {% for persona in personas %}
+              <option value="{{ persona.0 }}" data-custom="{{ persona.3 }}-{{ persona.1 }}">C.C.{{ persona.3 }}-{{ persona.1
+                }}</option>
+              {% endfor %}
+            </datalist>
+          </div>
+        </div>
+      
         <div class="button-group">
           <button type="submit">Agregar</button>
         </div>
