@@ -54,68 +54,26 @@
     <main class="main">
       {% for inmueble in inmuebles %}
       <div class="todo">
-        <div class="carrusel">
-          <section
-            id="main-slider"
-            class="splide"
-            aria-label="My Awesome Gallery"
-          >
-            <div class="splide__track">
-              <ul class="splide__list">
-                <li class="splide__slide">
-                  <img
-                    src="{{url_for('static',filename='/img/ejm2.jpg')}}"
-                    alt=""
-                  />
-                </li>
-                <li class="splide__slide">
-                  <img
-                    src="{{url_for('static',filename='/img/ejm2.jpg')}}"
-                    alt=""
-                  />
-                </li>
-                <li class="splide__slide">
-                  <img
-                    src="{{url_for('static',filename='/img/ejm2.jpg')}}"
-                    alt=""
-                  />
-                </li>
-                <li class="splide__slide">
-                  <img
-                    src="{{url_for('static',filename='/img/ejm2.jpg')}}"
-                    alt=""
-                  />
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <ul id="thumbnails" class="thumbnails">
-            <li class="thumbnail">
-              <img
-                src="{{url_for('static',filename='/img/ejm2.jpg')}}"
-                alt=""
-              />
-            </li>
-            <li class="thumbnail">
-              <img
-                src="{{url_for('static',filename='/img/ejm2.jpg')}}"
-                alt=""
-              />
-            </li>
-            <li class="thumbnail">
-              <img
-                src="{{url_for('static',filename='/img/ejm2.jpg')}}"
-                alt=""
-              />
-            </li>
-            <li class="thumbnail">
-              <img
-                src="{{url_for('static',filename='/img/ejm2.jpg')}}"
-                alt=""
-              />
-            </li>
-          </ul>
+        <div class="container-carousel">
+          <div class="carruseles" id="slider">
+            <section class="slider-section">
+              <img src="{{url_for('static',filename='/img/1.jpg')}}">
+            </section>
+            <section class="slider-section">
+              <img src="{{url_for('static',filename='/img/2.jpg')}}">
+            </section>
+            <section class="slider-section">
+              <img src="{{url_for('static',filename='/img/3.jpg')}}">
+            </section>
+            <section class="slider-section">
+              <img src="{{url_for('static',filename='/img/4.jpg')}}">
+            </section>
+            <section class="slider-section">
+              <img src="{{url_for('static',filename='/img/5.jpg')}}"> 
+            </section>
+          </div>
+          <div class="btn-left"><i class='bx bx-chevron-left'></i></div>
+          <div class="btn-right"><i class='bx bx-chevron-right'></i></div>
         </div>
         <div class="box">
           <table>
@@ -146,6 +104,22 @@
             </tr>
           </table>
         </div>
+        <div class="formc">
+          <form action="">
+            <div class="asd">
+              <label>AGENDAR VISITA</label>
+            </div>
+            <div class="d1">
+              <label>Nombre</label>
+              <input type="text" placeholder="Nombre" class="" />
+            </div>
+            <div class="d2">
+              <label>Telefono</label>
+              <input type="text" placeholder="Telefono" class="" />
+            </div>
+            <button type="submit">Enviar Solicitud</button>
+          </form>
+        </div>
         <div class="box2">
           <table>
             <thead>
@@ -156,65 +130,60 @@
             </tbody>
           </table>
         </div>
-        <div class="model" id="model">
-          <div class="formc">
-            <form action="">
-              <div class="asd">
-                <label for="">AGENDAR VISITA</label>
-              </div>
-              <div class="">
-                <label for="">Nombre</label>
-                <input type="text" placeholder="Nombre" class="" />
-              </div>
-              <div class="">
-                <label for="">Telefono</label>
-                <input type="text" placeholder="Telefono" class="" />
-              </div>
-              <button type="submit">Enviar Solicitud</button>
-            </form>
-          </div>
+    
         </div>
-      </div>
       {% endfor %}
       <script>
-        var splide = new Splide("#main-slider", {
-          width: 600,
-          height: 300,
-          pagination: false,
-          cover: true,
-        });
+const btnLeft = document.querySelector(".btn-left"),
+      btnRight = document.querySelector(".btn-right"),
+      slider = document.querySelector("#slider"),
+      sliderSection = document.querySelectorAll(".slider-section");
 
-        var thumbnails = document.getElementsByClassName("thumbnail");
-        var current;
 
-        for (var i = 0; i < thumbnails.length; i++) {
-          initThumbnail(thumbnails[i], i);
-        }
+btnLeft.addEventListener("click", e => moveToLeft())
+btnRight.addEventListener("click", e => moveToRight())
 
-        function initThumbnail(thumbnail, index) {
-          thumbnail.addEventListener("click", function () {
-            splide.go(index);
-          });
-        }
+setInterval(() => {
+    moveToRight()
+}, 3000);
 
-        splide.on("mounted move", function () {
-          var thumbnail = thumbnails[splide.index];
 
-          if (thumbnail) {
-            if (current) {
-              current.classList.remove("is-active");
-            }
+let operacion = 0,
+    counter = 0,
+    widthImg = 100 / sliderSection.length;
 
-            thumbnail.classList.add("is-active");
-            current = thumbnail;
-          }
-        });
+function moveToRight() {
+    if (counter >= sliderSection.length-1) {
+        counter = 0;
+        operacion = 0;
+        slider.style.transform = `translate(-${operacion}%)`;
+        slider.style.transition = "none";
+        return;
+    } 
+    counter++;
+    operacion = operacion + widthImg;
+    slider.style.transform = `translate(-${operacion}%)`;
+    slider.style.transition = "all ease .6s"
+    
+}  
 
-        splide.mount();
+function moveToLeft() {
+    counter--;
+    if (counter < 0 ) {
+        counter = sliderSection.length-1;
+        operacion = widthImg * (sliderSection.length-1)
+        slider.style.transform = `translate(-${operacion}%)`;
+        slider.style.transition = "none";
+        return;
+    } 
+    operacion = operacion - widthImg;
+    slider.style.transform = `translate(-${operacion}%)`;
+    slider.style.transition = "all ease .6s"  
+}   
       </script>
       <script src="/js/intedetalles.js"></script>
     </main>
-    <button onclick="history.back()">Regresar!</button>
+    <button id="botonRegresar" onclick="history.back()">Regresar!</button>
     
     <footer>
       <div class="social">

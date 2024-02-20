@@ -87,22 +87,21 @@ th {
     color: #fff;
 }
 
-/* Estilo de los formularios */
-/* form {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
+form {
+    border: none; /* Quitamos el borde original */
+    padding: 20px; /* Espaciado interno del formulario */
+    width: 70%; /* Ancho del formulario, puedes ajustarlo según tus necesidades */
+    margin: 0 auto; /* Centrar el formulario en la página */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agregar sombra al formulario */
+  }
 
 .form-container {
     display: flex;
-    justify-content: center;
+    justify-content: center; ;
   }
 
   .form-section {
-    flex: 0 0 38%; /* Ajusta el ancho según tus necesidades */
+    flex: 0 0 38%;
   }
 
   .panel .form-container-update {
@@ -111,7 +110,7 @@ th {
   }
 
   .panel .form-section-update {
-    flex: 0 0 38%; /* Ajusta el ancho según tus necesidades */
+    flex: 0 0 38%; 
   }
 
   .panel label {
@@ -128,11 +127,6 @@ th {
   .form-section-updatec {
     flex: 0 0 38%;
   }
-/* label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-} */
 
 .formulario {
     display: flex;
@@ -146,11 +140,11 @@ th {
 }
 
 .form-section-update {
-    margin: 0 10px; /* Ajusta el margen entre las secciones según tus preferencias */
+    margin: 0 10px; 
 }
 
 .button-group {
-    margin-top: 20px; /* Ajusta el margen según tus preferencias */
+    margin-top: 20px;
 }
 
 #formularioContrato {
@@ -322,3 +316,6 @@ label {
     margin-right: 10px; /* Puedes ajustar este valor según tus preferencias */
   }
   
+  textarea {
+    resize: none; /* Deshabilita la función de redimensionamiento */
+  }

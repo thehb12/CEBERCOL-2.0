@@ -172,7 +172,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  text-align: center; /* Añade para centrar el texto dentro de las celdas */
+  text-align: center; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .three-column-table {
