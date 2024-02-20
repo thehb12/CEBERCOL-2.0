@@ -77,6 +77,7 @@
           {% if current_page < total_pages %} <a href="{{ url_for('contratos', page=current_page + 1) }}">Siguiente</a>
             {% endif %}
       </div>
+      <h2>Registrar Inmuebles</h2>
       <form id="formularioContrato" action="/add_contrato" method="POST">
         <label>Codigo inmueble:</label>
         <select name="CodigoInmueble">
