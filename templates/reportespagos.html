@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/reportes.css">
+    <title>Document</title>
+</head>
+<header>
+  <nav>
+    <div class="navbar-left">
+        <span>Bienvenido, Administrador</span>
+    </div>
+    <div class="navbar-right">
+        <a href="{{url_for('admini')}}">Inmuebles</a>
+        <a href="{{url_for('contratos')}}">Contratos</a>
+        <a href="{{url_for('recibos')}}">Recibos</a>
+        <a href="{{url_for('personas')}}">Personas</a>
+        <div class="dropdown" id="reportesDropdown">
+            <span>Reportes</span>
+            <div class="dropdown-content">
+                <a href="reporteI">Inquilino</a>
+                <a href="reporteP">Pagos</a>
+            </div>
+        </div>
+        <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+    </div>
+</nav>
+  </header>
+<body>
+    <div class="panel">
+        <h2>Reportes de inquilinos</h2>
+        <button class="boton-verde">Haz clic</button>   
+        <div class="scrollable-list" id="list">
+          <table>
+            <thead>
+              <tr>
+                <td>Tipo</td>
+                <td>Ubicacion</td>
+                <td>Habitaciones</td>
+                <td>Baños</td>
+                <td>Garaje</td>
+                <td>Precio</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for inmueble in inmuebles %}
+              <tr>
+                <!-- Tipo -->
+                <td>{{inmueble.11}}</td>
+                <!-- Ubicacion -->
+                <td>{{inmueble.17}}</td>
+                <!-- Habitaciones -->
+                <td>{{inmueble.7}}</td>
+                <!-- Baños -->
+                <td>{{inmueble.6}}</td>
+                <!-- Garaje -->
+                <td>{{inmueble.9}}</td>
+                <!-- Precio -->
+                <td>{{inmueble.13}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    
+</body>
+<script>
+  // Agrega un script para manejar el evento hover y mostrar/ocultar el contenido del dropdown
+  var reportesDropdown = document.getElementById("reportesDropdown");
+
+  reportesDropdown.addEventListener("mouseover", function () {
+      // Muestra el contenido del dropdown cuando el mouse pasa por encima
+      this.querySelector(".dropdown-content").style.display = "block";
+  });
+
+  reportesDropdown.addEventListener("mouseout", function () {
+      // Oculta el contenido del dropdown cuando el mouse sale
+      this.querySelector(".dropdown-content").style.display = "none";
+  });
+</script>
+</html>

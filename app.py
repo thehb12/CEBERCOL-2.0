@@ -484,6 +484,13 @@ def delete_inmueble(codigo):
 def inicio():
     return render_template('inteindex.html')
 
+@app.route('/reporteI')
+def reporteI():
+    return render_template('reportesinquilino.html')
+@app.route('/reporteP')
+def reporteP():
+    return render_template('reportespagos.html')
+
 
 @app.route('/login')
 def intelogin():

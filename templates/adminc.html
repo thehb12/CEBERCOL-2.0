@@ -5,23 +5,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>adminc</title>
-  <link rel="stylesheet" href="{{url_for('static',filename='administrador.css')}}" />
-</head>
+  <link rel="stylesheet" href="{{url_for('static',filename='reportes.css')}}" /></head>
 
 <body>
   <header>
     <nav>
       <div class="navbar-left">
-        <span>Bienvenido, Administrador</span>
+          <span>Bienvenido, Administrador</span>
       </div>
       <div class="navbar-right">
-        <a href="{{url_for('admini')}}">Inmuebles</a>
-        <a href="{{url_for('contratos')}}">Contratos</a>
-        <a href="{{url_for('recibos')}}">Recibos</a>
-        <a href="{{url_for('personas')}}">Personas</a>
-        <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
+          <a href="{{url_for('admini')}}">Inmuebles</a>
+          <a href="{{url_for('contratos')}}">Contratos</a>
+          <a href="{{url_for('recibos')}}">Recibos</a>
+          <a href="{{url_for('personas')}}">Personas</a>
+          <div class="dropdown" id="reportesDropdown">
+              <span>Reportes</span>
+              <div class="dropdown-content">
+                  <a href="{{url_for('reporteI')}}">Inquilino</a>
+                  <a href="{{url_for('reporteP')}}">Pagos</a>
+              </div>
+          </div>
+          <a href="{{url_for('intelogin')}}">Cerrar sesión</a>
       </div>
-    </nav>
+  </nav>
   </header>
   <main>
     <div class="panel">
@@ -148,4 +154,18 @@
   });
 </script>
 
+<script>
+  // Agrega un script para manejar el evento hover y mostrar/ocultar el contenido del dropdown
+  var reportesDropdown = document.getElementById("reportesDropdown");
+
+  reportesDropdown.addEventListener("mouseover", function () {
+      // Muestra el contenido del dropdown cuando el mouse pasa por encima
+      this.querySelector(".dropdown-content").style.display = "block";
+  });
+
+  reportesDropdown.addEventListener("mouseout", function () {
+      // Oculta el contenido del dropdown cuando el mouse sale
+      this.querySelector(".dropdown-content").style.display = "none";
+  });
+</script>
 </html>

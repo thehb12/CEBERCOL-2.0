@@ -46,7 +46,7 @@ select {
 
 .checkbox-group {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Tres columnas de tamaño igual */
+    grid-template-columns: repeat(4, 1fr); /* Tres columnas de tamaño igual */
     gap: 10px; /* Espaciado entre las columnas */
     width: 100%;
     padding: 10px;
