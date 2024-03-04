@@ -1,10 +1,13 @@
 
-from flask import Flask, render_template, request, url_for, redirect, flash, Response,  jsonify
-
-from flask import jsonify
-from flask import Flask, render_template, request, url_for, redirect, flash, Response
+from flask import Flask, render_template, request, url_for, redirect, flash, Response,  jsonify, send_file
 from flask_mysqldb import MySQL
+from openpyxl import Workbook
+from io import BytesIO
 import pymysql
+import io
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
 app = Flask(__name__)
 
 # CONEXION MYSQL
@@ -214,7 +217,7 @@ def add_recibo():
         # Obtén los valores booleanos de los meses del formulario
         meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
                  'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
-        meses_bool = {mes: request.form.get(mes) == 'on' for  mes in meses}
+        meses_bool = {mes: request.form.get(mes) == 'on' for mes in meses}
 
         # Configuración de la base de datos y cursor (puedes ajustar esto según tu lógica)
         cur = mysql.connection.cursor()
@@ -223,7 +226,7 @@ def add_recibo():
         campos = ', '.join(meses_bool.keys())
         valores = ', '.join(['%s' for _ in meses_bool])
 
-        valores_tuple=(codigo_contrato,fecha_pago,cuota) + \
+        valores_tuple = (codigo_contrato, fecha_pago, cuota) + \
             tuple(meses_bool.values())
         valores_tuple += (False,) * (len(meses) - len(meses_bool))
 
@@ -477,6 +480,59 @@ def delete_inmueble(codigo):
     flash('Se Elimino Correctamente')
     return redirect(url_for('admini'))
 
+# Descargar reporte
+# pip install openpyxl
+
+
+@app.route('/descargar_excel', methods=['GET'])
+def descargar_excel():
+    cur = mysql.connection.cursor()
+    cur.execute('''
+                SELECT 
+                p.nombre AS Nombre, 
+                p.correo AS Correo, 
+                p.cedula AS Cedula, 
+                p.telefono AS Telefono, 
+                i.tipo_inmueble AS Tipo, 
+                b.nombre AS Barrio, 
+                c.codigo AS 'ID Contrato', 
+                c.plazo AS Plazo, 
+                c.canon AS Canon
+                FROM 
+                personas p
+                INNER JOIN contratos c
+                INNER JOIN inmuebles i ON c.codigo_inmueble = i.codigo
+                INNER JOIN barrios b ON i.codigo_barrio = b.codigo;
+                ''')
+    reportes = cur.fetchall()
+
+    # Crear un libro de trabajo de Excel y seleccionar la hoja activa
+    wb = Workbook()
+    ws = wb.active
+
+    # Agregar los encabezados de las columnas
+    ws.append(['Nombre', 'Correo', 'Cedula', 'Telefono', 'Tipo',
+              'Barrio', 'ID Contrato', 'Plazo', 'Canon'])
+
+    # Agregar los datos de los reportes a las filas
+    for reporte in reportes:
+        ws.append(reporte)
+
+    # Guardar el libro de trabajo en un objeto BytesIO
+    excel_io = BytesIO()
+    wb.save(excel_io)
+    excel_io.seek(0)
+
+    # Devolver el archivo Excel como una respuesta para descargar
+    return Response(
+        excel_io.getvalue(),
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        headers={
+            "Content-disposition": "attachment; filename=reporte.xlsx"
+        }
+    )
+
+
 # NAVEGACION
 
 
@@ -484,11 +540,35 @@ def delete_inmueble(codigo):
 def inicio():
     return render_template('inteindex.html')
 
+
 @app.route('/reporteI')
 def reporteI():
-    return render_template('reportesinquilino.html')
+    cur = mysql.connection.cursor()
+    cur.execute('''
+                SELECT 
+                p.nombre AS Nombre, 
+                p.correo AS Correo, 
+                p.cedula AS Cedula, 
+                p.telefono AS Telefono, 
+                i.tipo_inmueble AS Tipo, 
+                b.nombre AS Barrio, 
+                c.codigo AS 'ID Contrato', 
+                c.plazo AS Plazo, 
+                c.canon AS Canon
+                FROM 
+                personas p
+                INNER JOIN contratos c
+                INNER JOIN inmuebles i ON c.codigo_inmueble = i.codigo
+                INNER JOIN barrios b ON i.codigo_barrio = b.codigo;
+                ''')
+    reportes = cur.fetchall()
+    return render_template('reportesinquilino.html', reportes=reportes)
+
+
 @app.route('/reporteP')
 def reporteP():
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM recibos')
     return render_template('reportespagos.html')
 
 
@@ -553,6 +633,7 @@ def inteinmu():
 @app.route('/contratod')
 def contratod():
     return render_template('adminc-directo.html')
+
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)

@@ -27,7 +27,6 @@ fecha_fin date,
 codigo_inmueble varchar(40), 
 codigo_arriendatario integer, foreign key(codigo_arriendatario) references personas(codigo));
 
-drop table contratos;
 
 create table personas(
 codigo integer primary key auto_increment, 
@@ -55,7 +54,6 @@ octubre bool,
 noviembre bool,
 diciembre bool);
 
-drop table recibos;
 
 create table barrios(
 codigo integer primary key auto_increment, 
@@ -77,7 +75,5 @@ codigo integer primary key auto_increment,
 usuario varchar(120),
 contrasena varchar(30)
 );
-drop database cebercol;
-drop table inmuebles;
 
 use cebercol;
