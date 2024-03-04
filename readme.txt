@@ -1,12 +1,6 @@
 
 Julian
-#ICON DE LAS PAGINAS
-#TITULOS
-#Boton regresar
-#Agregar una seccion sobre los servicios en index
-#Hacer que el boton de servicios me lleve a esa seccion del index
-#arreglar css intedetalle(Centrado)
-#slider o carrucel arreglar o hacer otro
+
 Juan
 #Mostrar imagenes(esta en veremos)
 #Enviar solicitud(facil)
