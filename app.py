@@ -502,7 +502,8 @@ def descargar_excel():
                 personas p
                 INNER JOIN contratos c
                 INNER JOIN inmuebles i ON c.codigo_inmueble = i.codigo
-                INNER JOIN barrios b ON i.codigo_barrio = b.codigo;
+                INNER JOIN barrios b ON i.codigo_barrio = b.codigo
+                WHERE Rol="Inquilino";
                 ''')
     reportes = cur.fetchall()
 
@@ -533,6 +534,54 @@ def descargar_excel():
     )
 
 
+@app.route('/descargar_excel2', methods=['GET'])
+def descargar_excel2():
+    cur = mysql.connection.cursor()
+    cur.execute('''
+                SELECT 
+                r.fecha_pago AS Fecha, 
+                i.tipo_inmueble AS Inmueble, 
+                p.cedula AS Cedula, 
+                p.nombre AS Nombre, 
+                r.codigo AS 'ID Recibo', 
+                c.canon AS Valor
+                FROM 
+                personas p
+                INNER JOIN contratos c
+                INNER JOIN inmuebles i ON c.codigo_inmueble = i.codigo
+                INNER JOIN recibos r
+                WHERE 
+                r.marzo = "1" AND p.rol = "Inquilino";
+                ''')
+    reportes = cur.fetchall()
+
+    # Crear un libro de trabajo de Excel y seleccionar la hoja activa
+    wb = Workbook()
+    ws = wb.active
+
+    # Agregar los encabezados de las columnas
+    ws.append(['Fecha', 'Inmueble', 'Cedula', 'Nombre', 'ID recibo',
+              'Valor'])
+
+    # Agregar los datos de los reportes a las filas
+    for reporte in reportes:
+        ws.append(reporte)
+
+    # Guardar el libro de trabajo en un objeto BytesIO
+    excel_io = BytesIO()
+    wb.save(excel_io)
+    excel_io.seek(0)
+
+    # Devolver el archivo Excel como una respuesta para descargar
+    return Response(
+        excel_io.getvalue(),
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        headers={
+            "Content-disposition": "attachment; filename=reportepagos.xlsx"
+        }
+    )
+
+
 # NAVEGACION
 
 
@@ -559,7 +608,8 @@ def reporteI():
                 personas p
                 INNER JOIN contratos c
                 INNER JOIN inmuebles i ON c.codigo_inmueble = i.codigo
-                INNER JOIN barrios b ON i.codigo_barrio = b.codigo;
+                INNER JOIN barrios b ON i.codigo_barrio = b.codigo
+                WHERE Rol="Inquilino";
                 ''')
     reportes = cur.fetchall()
     return render_template('reportesinquilino.html', reportes=reportes)
@@ -568,8 +618,24 @@ def reporteI():
 @app.route('/reporteP')
 def reporteP():
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM recibos')
-    return render_template('reportespagos.html')
+    cur.execute('''
+                SELECT 
+                r.fecha_pago AS Fecha, 
+                i.tipo_inmueble AS Inmueble, 
+                p.cedula AS Cedula, 
+                p.nombre AS Nombre, 
+                r.codigo AS 'ID Recibo', 
+                c.canon AS Valor
+                FROM 
+                personas p
+                INNER JOIN contratos c
+                INNER JOIN inmuebles i ON c.codigo_inmueble = i.codigo
+                INNER JOIN recibos r
+                WHERE 
+                r.marzo = "1" AND p.rol = "Inquilino";;
+                ''')
+    reportes = cur.fetchall()
+    return render_template('reportespagos.html', reportes=reportes)
 
 
 @app.route('/login')
