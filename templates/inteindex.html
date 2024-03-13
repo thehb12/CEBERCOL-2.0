@@ -1,58 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inicio</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static',filename='footer.css')}}" />
-    <link rel="stylesheet" href="{{url_for('static',filename='header.css')}}" />
-    <link rel="shortcut icon" href="ruta" type="image/x-icon">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-  </head>
-  <body>
-    <header>
-      <div class="head">
-        <div class="logo">
-          <img
-            src="{{url_for('static',filename='/img/cebercolicon_1.ico')}}"
-            alt="logo de la marca"
-          />
-        </div>
-        <nav class="navbar">
-          <ul>
-            <li>
-              <a href="{{url_for('inteindex')}}">Inicio</a>
-            </li>
-            <li>
-              <a href="{{url_for('inteinmu')}}">Inmuebles</a>
-            </li>
-            <li>
-              <a href="#contenido">Servicios</a>
-            </li>
-            <li><a href="{{url_for('consultar')}}">Contrato</a></li>
-            <li>
-              <a href="{{url_for('intelogin')}}">
-                <i class="fa-regular fa-user"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static',filename='footer.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static',filename='header.css')}}" />
+  <link rel="shortcut icon" href="ruta" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+  <header>
+    <div class="head">
+      <div class="logo">
+        <img src="{{url_for('static',filename='/img/cebercolicon_1.ico')}}" alt="logo de la marca" />
       </div>
-    </header>
-    <main class="main">
-      <section class="contenedor1">
-        <div class="banner">
-          <div class="banner_texto">
-            <center>
-              <img
-                src="{{url_for('static',filename='/img/cebercologoo.png ')}}"
-                alt=""
-              />
+      <nav class="navbar">
+        <ul>
+          <li>
+            <a href="{{url_for('inteindex')}}">Inicio</a>
+          </li>
+          <li>
+            <a href="{{url_for('inteinmu')}}">Inmuebles</a>
+          </li>
+          <li>
+            <a href="#contenido">Servicios</a>
+          </li>
+          <li><a href="{{url_for('consultar')}}">Contrato</a></li>
+          <li>
+            <a href="{{url_for('intelogin')}}">
+              <i class="fa-regular fa-user"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main class="main">
+    <section class="contenedor1">
+      <div class="banner">
+        <div class="banner_texto">
+          <center>
+            <img src="{{url_for('static',filename='/img/cebercologoo.png ')}}" alt="" />
             <p>
               Sencillas, sonrientes y llenas de ingenuidad, como la musulmana
               Schehrazada, su madre suculenta que las dió a luz en el misterio;
@@ -60,118 +53,116 @@
               —lúbrico y feroz—, bajo la mirada enternecida de Alah, clemente y
               misericordioso.
             </p>
-          </div>
         </div>
-      </section>
-      <section class="contenedor2">
-        <div class="carta">
-          <figure>
-            <img src="{{url_for('static',filename='/img/mision.jpg')}}" />
-          </figure>
-          <div class="contenido">
-            <h3>Mision</h3>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-              recusandae, culpa quibusdam harum iste quas earum repellat modi
-              voluptate cum
-            </p>
-            <!-- <a href="#">Leer Más</a> -->
-          </div>
+      </div>
+    </section>
+    <section class="contenedor2">
+      <div class="carta">
+        <figure>
+          <img src="{{url_for('static',filename='/img/mision.jpg')}}" />
+        </figure>
+        <div class="contenido">
+          <h3>Mision</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
+            recusandae, culpa quibusdam harum iste quas earum repellat modi
+            voluptate cum
+          </p>
+          <!-- <a href="#">Leer Más</a> -->
         </div>
-        <div class="carta">
-          <figure>
-            <img src="{{url_for('static',filename='/img/vision.png')}}" />
-          </figure>
-          <div class="contenido">
-            <h3>Visión</h3>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. In ipsam
-              ab ea ducimus ad adipisci dolores commodi quibusdam necessitatibus
-              corporis?
-            </p>
-            <!-- <a href="#">Leer Más</a> -->
-          </div>
+      </div>
+      <div class="carta">
+        <figure>
+          <img src="{{url_for('static',filename='/img/vision.png')}}" />
+        </figure>
+        <div class="contenido">
+          <h3>Visión</h3>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. In ipsam
+            ab ea ducimus ad adipisci dolores commodi quibusdam necessitatibus
+            corporis?
+          </p>
+          <!-- <a href="#">Leer Más</a> -->
         </div>
-        <div class="carta">
-          <figure>
-            <img src="{{url_for('static',filename='/img/lema.png')}}" />
-          </figure>
-          <div class="contenido">
-            <h3>Lema</h3>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. In ipsam
-              ab ea ducimus ad adipisci dolores commodi quibusdam necessitatibus
-              corporis?
-            </p>
-          </div>
+      </div>
+      <div class="carta">
+        <figure>
+          <img src="{{url_for('static',filename='/img/lema.png')}}" />
+        </figure>
+        <div class="contenido">
+          <h3>Lema</h3>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. In ipsam
+            ab ea ducimus ad adipisci dolores commodi quibusdam necessitatibus
+            corporis?
+          </p>
         </div>
-      </section>
-      <div class="contenido" id="contenido">
-        <table class="three-column-table">
-            <tr>
-                <td class="column1">
-                    <!-- Contenido de la columna 1 -->
-                    <h2>Servicio 1</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit....</p>
-                </td>
-                <td class="column2">
-                    <!-- Contenido de la columna 2 -->
-                    <h2>Servicio 2</h2>
-                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....</p>
-                </td>
-                <td class="column3">
-                    <!-- Contenido de la columna 3 -->
-                    <h2>Servicio 3</h2>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-                </td>
-            </tr>
-        </table>
-        <table class="three-column-table">
-          <tr>
-              <td class="column1">
-                  <!-- Contenido de la columna 1 -->
-                  <h2>Servicio 4</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit....</p>
-              </td>
-              <td class="column2">
-                  <!-- Contenido de la columna 2 -->
-                  <h2>Servicio 5</h2>
-                  <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....</p>
-              </td>
-              <td class="column3">
-                  <!-- Contenido de la columna 3 -->
-                  <h2>Servicio 6</h2>
-                  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-              </td>
-          </tr>
+      </div>
+    </section>
+    <div class="contenido" id="contenido">
+      <table class="three-column-table">
+        <tr>
+          <td class="column1">
+            <!-- Contenido de la columna 1 -->
+            <h2>Venta</h2>
+            <p>Venta de inmuebles</p>
+          </td>
+          <td class="column2">
+            <!-- Contenido de la columna 2 -->
+            <h2>Alquiler</h2>
+            <p>Alquiler de inmuebles</p>
+          </td>
+          <td class="column3">
+            <!-- Contenido de la columna 3 -->
+            <h2>Asesoramiento</h2>
+            <p>Asesoramiento legal en transacciones y resolución de problemas legales</p>
+          </td>
+        </tr>
       </table>
+      <table class="three-column-table">
+        <tr>
+          <td class="column1">
+            <!-- Contenido de la columna 1 -->
+            <h2>Consultoria</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit....</p>
+          </td>
+          <td class="column2">
+            <!-- Contenido de la columna 2 -->
+            <h2>Hipotecas</h2>
+            <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua....</p>
+          </td>
+          <td class="column3">
+            <!-- Contenido de la columna 3 -->
+            <h2>Home staging</h2>
+            <p>Mejora visual de espacios para atraer a posibles compradores.</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    </div>
+  </main>
+  <footer>
+
+    <div class="datos">
+      <h2>Cesar albereto maradona</h2>
+      <p>
+        Nosotros sabemos que yo se que nada se, yo se que algo no se pero se
+        que algo usted no sabe que yo tampoco se. -Arcangel
+      </p>
+    </div>
+    <div class="mapa">
+      <div>
+        <a
+          href="https://www.google.com/maps/place/Cra.+19+%2319-7,+Barrancabermeja,+Santander/@7.0586298,-73.8584949,18z/data=!4m5!3m4!1s0x8e42eca46cca93b9:0xc9eeb5bfcfb604c1!8m2!3d7.0585614!4d-73.8584984"><img
+            src="{{url_for('static',filename='/img/pin-de-ubicacion.png')}}" alt="Ubicacion" />
+        </a>
+        <p>Carrera 19 #19-7</p>
       </div>
-    </div>    
-    </main>
-    <footer>
-      
-      <div class="datos">
-        <h2>Cesar albereto maradona</h2>
-        <p>
-          Nosotros sabemos que yo se que nada se, yo se que algo no se pero se
-          que algo usted no sabe que yo tampoco se. -Arcangel
-        </p>
-      </div>
-      <div class="mapa">
-        <div>
-          <a
-            href="https://www.google.com/maps/place/Cra.+19+%2319-7,+Barrancabermeja,+Santander/@7.0586298,-73.8584949,18z/data=!4m5!3m4!1s0x8e42eca46cca93b9:0xc9eeb5bfcfb604c1!8m2!3d7.0585614!4d-73.8584984"
-            ><img
-              src="{{url_for('static',filename='/img/pin-de-ubicacion.png')}}"
-              alt="Ubicacion"
-            />
-          </a>
-          <p>Carrera 19 #19-7</p>
-        </div>
-      </div>
-      <div class="social">
-        <p>Derechos de autor © 2023 Equipo de trabajo JUJU, Nuestro Sitio Web. Todos los derechos reservados.</p>
-      </div>
-    </footer>
-  </body>
+    </div>
+    <div class="social">
+      <p>Derechos de autor © 2023 Equipo de trabajo JUJU, Nuestro Sitio Web. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+</body>
+
 </html>

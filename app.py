@@ -8,6 +8,7 @@ import io
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import base64
 app = Flask(__name__)
 
 # CONEXION MYSQL
@@ -669,31 +670,40 @@ def consultar():
 
 @app.route('/inmuebles')
 def inteinmu():
-    # Obtener el número de página de la URL, por defecto es 1
     page = request.args.get('page', 1, type=int)
-    items_per_page = 8  # Número máximo de inmuebles por página
-
-    # Calcular el desplazamiento en la base de datos
+    items_per_page = 8
     offset = (page - 1) * items_per_page
 
     cur = mysql.connection.cursor()
     cur.execute("""
-                SELECT inmuebles.*,barrios.codigo_comuna,
-                barrios.nombre AS nombre_barrio
-                FROM inmuebles
-                INNER JOIN barrios ON inmuebles.codigo_barrio=barrios.codigo
-                LIMIT %s OFFSET %s
+    SELECT inmuebles.foto1, inmuebles.foto2, inmuebles.foto3, inmuebles.foto4, inmuebles.foto5, inmuebles.codigo, inmuebles.descripcion, inmuebles.patio, inmuebles.tipo_servicio, inmuebles.tipo_inmueble, inmuebles.codigo_barrio, inmuebles.habitacion, inmuebles.bano, inmuebles.garaje, inmuebles.precio, inmuebles.codigo_arrendador, barrios.codigo_comuna, barrios.nombre AS nombre_barrio
+    FROM inmuebles
+    INNER JOIN barrios ON inmuebles.codigo_barrio = barrios.codigo
+    LIMIT %s OFFSET %s0
     """, (items_per_page, offset))
+
     inmuebles = cur.fetchall()
 
-    # Obtener el número total de inmuebles
+    # Convertir las imágenes de blobs a URLs Base64
+    inmuebles_base64 = []
+    for inmueble in inmuebles:
+        foto_urls = []
+        for i in range(5):
+            foto_blob = inmueble[i]
+            if foto_blob:
+                foto_base64 = base64.b64encode(foto_blob).decode('utf-8')
+                foto_urls.append(foto_base64)
+            else:
+                foto_urls.append(None)
+        inmueble_base64 = tuple(foto_urls) + inmueble[5:]
+        inmuebles_base64.append(inmueble_base64)
+
     cur.execute("SELECT COUNT(*) FROM inmuebles")
     total_inmuebles = cur.fetchone()[0]
-
-    # Calcular el número total de páginas
     total_pages = (total_inmuebles + items_per_page - 1) // items_per_page
+    print(inmueble_base64)
 
-    return render_template('inteinmu.html', inmuebles=inmuebles, current_page=page, total_pages=total_pages)
+    return render_template('inteinmu.html', inmuebles=inmuebles_base64, current_page=page, total_pages=total_pages)
 
 
 @app.route('/contratod')
