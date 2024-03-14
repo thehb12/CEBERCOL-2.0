@@ -282,16 +282,16 @@ thead {
 }
 
 .pagination a:hover {
-    background-color: #077412;
+    background-color: #2ecc71;
 }
 
 .pagination .current-page {
-    background-color: #1ecd2d;
+    background-color: #2ecc71;
     cursor: default;
 }
 
 .first-page {
-    background-color: #1ecd2d; /* Define el color verde para el enlace 'Primera' */
+    background-color: #2ecc71; /* Define el color verde para el enlace 'Primera' */
     /* Otros estilos si es necesario */
 }
 
@@ -342,11 +342,10 @@ label {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #159709   ;
+    background-color:#2ecc71  ;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border: 1px solid #044a0c; /* Borde */
+    border: 1px solid #2ecc71;
     border-radius: 4px;
 }
 
@@ -358,7 +357,7 @@ label {
 }
 
 .dropdown-content a:hover {
-    background-color: #11630a;
+    background-color: #208248;
 }
 
 /* Estilos para la separación entre elementos en el navbar */

@@ -177,11 +177,9 @@ body {
 }
 
 .three-column-table {
-  /* width: calc(33.33% - 10px); */
-  display: inline-block;
-  margin: 0 5px; /* Separación de 5px entre las tablas */
-  border-collapse: collapse;
-  margin-top: 20px;
+  width: 100%;
+  table-layout: fixed;
+  text-align: center; /* Centra el contenido de las celdas */
 }
 
 .three-column-table td {
