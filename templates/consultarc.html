@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='footer.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='header.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='consultar.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+    <header>
+        <div class="head">
+            <div class="logo">
+                <img src="{{url_for('static',filename='/img/cebercolicon_1.ico')}}" alt="logo de la marca" />
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="{{url_for('inteindex')}}">Inicio</a></li>
+                    <li><a href="{{url_for('inteinmu')}}">Inmuebles</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="{{url_for('consultar')}}">Contrato</a></li>
+                    <li><a href="{{url_for('intelogin')}}"><i class="fa-regular fa-user"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        </div>
+        <div id="resultado">
+            <table class="table-style">
+                <tr>
+                    <th>Cédula</th>
+                    <th>ID Contrato</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Final</th>
+                    <th>Ver Contrato</th>
+                </tr>
+                {% for contrato in contratos_personas %}
+                <tr>
+                    <td>{{contrato.10}}</td>
+                    <td>{{contrato.0}}</td>
+                    <td>{{contrato.3}}</td>
+                    <td>{{contrato.4}}</td>
+                    <td><i class="fa-regular fa-eye" id="recibosx" data-id="{{contrato.0}}"></i></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </main>
+    <footer>
+        <div class="social">
+            <div class="wpp">
+                <h2>WhatsApp</h2>
+                <a href="https://wa.me/573204991618"><img src="{{url_for('static',filename='/img/wpp.png')}}"
+                        alt="WhatsApp" /></a>
+            </div>
+            <div class="fb">
+                <h2>Facebook</h2>
+                <a href="https://www.facebook.com/juanfe.cabralesbarbaran/"><img
+                        src="{{url_for('static',filename='/img/fc.jpg')}}" alt="Facebook" /></a>
+            </div>
+            <div class="ig">
+                <h2>Instagram</h2>
+                <a href="https://www.instagram.com/juantosx/"><img
+                        src="{{url_for('static',filename='/img/instagram.png')}}" alt="Instagram" /></a>
+            </div>
+        </div>
+        <div class="datos">
+            <h2>Cesar albereto maradona</h2>
+            <p>Nosotros sabemos que yo se que nada se, yo se que algo no se pero se que algo usted no sabe que yo
+                tampoco se.
+                -Arcangel</p>
+        </div>
+        <div class="mapa">
+            <div>
+                <a
+                    href="https://www.google.com/maps/place/Cra.+19+%2319-7,+Barrancabermeja,+Santander/@7.0586298,-73.8584949,18z/data=!4m5!3m4!1s0x8e42eca46cca93b9:0xc9eeb5bfcfb604c1!8m2!3d7.0585614!4d-73.8584984">
+                    <img src="{{url_for('static',filename='/img/pin-de-ubicacion.png')}}" alt="Ubicacion" />
+                </a>
+                <p>Carrera 19 #19-7</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.querySelectorAll('.fa-eye').forEach(item => {
+            item.addEventListener('click', event => {
+                const contratoId = item.getAttribute('data-id');
+                window.location.href = '/consultarr/' + contratoId;
+            });
+        });
+    </script>
+
+</body>

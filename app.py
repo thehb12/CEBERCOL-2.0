@@ -668,6 +668,34 @@ def consultar():
     return render_template('consultar.html')
 
 
+@app.route('/consultarc', methods=['POST'])
+def consultarc():
+    if request.method == 'POST':
+        cedula = request.form['cedula']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+                    SELECT contratos.*, personas.*
+                    FROM contratos
+                    INNER JOIN personas ON contratos.codigo_arriendatario = personas.codigo
+                    WHERE cedula = %s
+        """, (cedula,))
+        contratos_personas = cur.fetchall()
+        return render_template('consultarc.html', contratos_personas=contratos_personas)
+
+
+@app.route('/consultarr/<int:contrato_id>', methods=['GET'])
+def consultarr(contrato_id):
+    cur = mysql.connection.cursor()
+    cur.execute("""
+                SELECT contratos.*, recibos.*
+                FROM contratos
+                INNER JOIN recibos ON recibos.codigo_contrato = contratos.codigo
+                WHERE contratos.codigo = %s
+    """, (contrato_id,))
+    recibos_contratos = cur.fetchall()
+    return render_template('consultarr.html', recibos_contratos=recibos_contratos)
+
+
 @app.route('/inmuebles')
 def inteinmu():
     page = request.args.get('page', 1, type=int)
